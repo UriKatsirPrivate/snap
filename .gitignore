@@ -6,3 +6,6 @@ venv/
 data/*.jsonl
 .pytest_cache/
 *.egg-info/
+NOTES.md
+run.sh
+setup-data-sharing.sh
