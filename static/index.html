@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>snap</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+  :root {
+    --bg: #f7f7f5;
+    --panel: #ffffff;
+    --border: #e4e4e1;
+    --text: #1c1c1a;
+    --muted: #767671;
+    --accent: #2563eb;
+    --ok: #16a34a;
+    --warn: #d97706;
+    --off: #9ca3af;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 14px;
+  }
+  header {
+    padding: 20px 28px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+  header h1 { margin: 0; font-size: 18px; }
+  header .sub { color: var(--muted); font-size: 13px; }
+  main {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 20px;
+    padding: 20px 28px;
+    align-items: start;
+  }
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+  }
+  .panel h2 { margin: 0 0 12px; font-size: 14px; }
+  .tabs { display: flex; gap: 4px; margin-bottom: 12px; }
+  .tab {
+    flex: 1;
+    text-align: center;
+    padding: 6px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    cursor: pointer;
+    color: var(--muted);
+  }
+  .tab.active { background: var(--accent); color: white; border-color: var(--accent); }
+  label { display: block; margin: 10px 0 4px; color: var(--muted); font-size: 12px; }
+  input, textarea {
+    width: 100%;
+    padding: 6px 8px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 13px;
+  }
+  textarea { resize: vertical; min-height: 54px; }
+  button.run {
+    margin-top: 14px;
+    width: 100%;
+    padding: 9px;
+    border: none;
+    border-radius: 6px;
+    background: var(--accent);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  button.run:disabled { background: var(--off); cursor: default; }
+  .hint { color: var(--muted); font-size: 11px; margin-top: 2px; }
+
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  .badge.selected, .badge.accepted { background: #dcfce7; color: var(--ok); }
+  .badge.fallback { background: #fef3c7; color: var(--warn); }
+  .badge.abstained { background: #f3f4f6; color: var(--off); }
+  .badge.pinned { background: #dbeafe; color: var(--accent); }
+  .badge.rejected { background: #fee2e2; color: #dc2626; }
+  .badge.latency { background: #ede9fe; color: #6d28d9; font-family: ui-monospace, monospace; text-transform: none; }
+
+  #resultPanel .empty { color: var(--muted); }
+  .option-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 7px 10px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    margin-bottom: 6px;
+    font-family: ui-monospace, monospace;
+    font-size: 12.5px;
+  }
+  .option-row.chosen { border-color: var(--ok); background: #f0fdf4; }
+  .option-row .mark { color: var(--ok); font-weight: 700; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+  th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--border); white-space: nowrap; }
+  th { color: var(--muted); font-weight: 600; }
+  td.mono { font-family: ui-monospace, monospace; }
+  .stream-wrap { max-height: 480px; overflow: auto; }
+  .spinner {
+    width: 14px; height: 14px;
+    border: 2px solid var(--border);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    display: inline-block;
+    animation: spin 0.7s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .error { color: #dc2626; font-size: 12.5px; margin-top: 8px; }
+</style>
+</head>
+<body>
+  <header>
+    <h1>snap</h1>
+    <span class="sub">host prepares options · Gemini picks one or abstains</span>
+  </header>
+
+  <main>
+    <div class="panel">
+      <div class="tabs">
+        <div class="tab active" data-tab="route">Route</div>
+        <div class="tab" data-tab="focus">Focus</div>
+      </div>
+
+      <form id="routeForm">
+        <label>Task ID</label>
+        <input name="task_id" value="t-1" />
+        <label>Candidates (one per line: id,provider,model)</label>
+        <textarea name="candidates">gemini-flash,google,gemini-2.5-flash
+gemini-pro,google,gemini-2.5-pro</textarea>
+        <label>Fallback route id (optional)</label>
+        <input name="fallback_route_id" value="gemini-flash" />
+        <label>Context (free text, sent as {"task": ...})</label>
+        <textarea name="context">Refactor the authentication module across 12 files to use dependency injection</textarea>
+        <button class="run" type="submit">Run route decision</button>
+      </form>
+
+      <form id="focusForm" style="display:none">
+        <label>Task ID</label>
+        <input name="task_id" value="t-1" />
+        <label>Session ID</label>
+        <input name="session_id" value="s-1" />
+        <label>Available tools (comma separated)</label>
+        <input name="available_tools" value="read_file,write_file,run_tests,grep" />
+        <label>Context (free text)</label>
+        <textarea name="context">Refactor the authentication module across 12 files to use dependency injection. Just started, nothing inspected yet.</textarea>
+        <button class="run" type="submit">Run focus decision</button>
+      </form>
+      <div id="formError" class="error"></div>
+    </div>
+
+    <div class="panel" id="resultPanel">
+      <h2>Result</h2>
+      <div class="empty">Run a decision to see the result here.</div>
+    </div>
+  </main>
+
+  <main style="grid-template-columns: 1fr; padding-top: 0;">
+    <div class="panel">
+      <h2>Decision stream</h2>
+      <div class="stream-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Time</th><th>Kind</th><th>Task</th><th>Offered</th>
+              <th>Choice</th><th>Status</th><th>Final</th><th>Selector time</th>
+            </tr>
+          </thead>
+          <tbody id="streamBody">
+            <tr><td colspan="8" class="empty">No decisions recorded yet.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+<script>
+const tabs = document.querySelectorAll(".tab");
+const routeForm = document.getElementById("routeForm");
+const focusForm = document.getElementById("focusForm");
+tabs.forEach(t => t.addEventListener("click", () => {
+  tabs.forEach(x => x.classList.remove("active"));
+  t.classList.add("active");
+  const isRoute = t.dataset.tab === "route";
+  routeForm.style.display = isRoute ? "" : "none";
+  focusForm.style.display = isRoute ? "none" : "";
+}));
+
+const resultPanel = document.getElementById("resultPanel");
+const formError = document.getElementById("formError");
+
+function statusBadge(decision) {
+  return `<span class="badge ${decision}">${decision}</span>`;
+}
+
+function latencyBadge(ms) {
+  if (ms === null || ms === undefined) return "";
+  return `<span class="badge latency">${ms.toFixed(0)} ms</span>`;
+}
+
+function renderRouteResult(req, resp) {
+  const rows = req.candidates.map(c => {
+    const isChosen = resp.chosen && resp.chosen.id === c.id;
+    return `<div class="option-row ${isChosen ? "chosen" : ""}">
+      <span>${c.id} <span style="color:var(--muted)">(${c.provider}/${c.model})</span></span>
+      ${isChosen ? '<span class="mark">chosen</span>' : ""}
+    </div>`;
+  }).join("");
+  resultPanel.innerHTML = `
+    <h2>Result ${statusBadge(resp.decision)} ${latencyBadge(resp.selector_latency_ms)}</h2>
+    ${rows}
+    <div class="hint" style="margin-top:10px;">record_id: ${resp.record_id}</div>
+  `;
+}
+
+function renderFocusResult(req, resp) {
+  const focusIds = ["inspect", "implement", "verify", "answer"];
+  const rows = focusIds.map(f => {
+    const isChosen = resp.focus === f;
+    return `<div class="option-row ${isChosen ? "chosen" : ""}">
+      <span>${f}</span>
+      ${isChosen ? '<span class="mark">chosen</span>' : ""}
+    </div>`;
+  }).join("");
+  resultPanel.innerHTML = `
+    <h2>Result ${statusBadge(resp.decision)} ${latencyBadge(resp.selector_latency_ms)}</h2>
+    ${rows}
+    <div class="hint" style="margin-top:10px;">tools: ${resp.tools.join(", ") || "(none)"}</div>
+    <div class="hint">record_id: ${resp.record_id}</div>
+  `;
+}
+
+routeForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  formError.textContent = "";
+  const fd = new FormData(routeForm);
+  const candidates = fd.get("candidates").split("\n").filter(Boolean).map(line => {
+    const [id, provider, model] = line.split(",").map(s => s.trim());
+    return { id, provider, model };
+  });
+  const body = {
+    task_id: fd.get("task_id"),
+    candidates,
+    fallback_route_id: fd.get("fallback_route_id") || null,
+    context: { task: fd.get("context") },
+  };
+  resultPanel.innerHTML = `<h2>Result <span class="spinner"></span></h2>`;
+  try {
+    const res = await fetch("/v1/decisions/route", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
+    if (!res.ok) throw new Error(await res.text());
+    renderRouteResult(body, await res.json());
+    loadStream();
+  } catch (err) {
+    formError.textContent = err.message;
+    resultPanel.innerHTML = `<h2>Result</h2><div class="empty">Failed.</div>`;
+  }
+});
+
+focusForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  formError.textContent = "";
+  const fd = new FormData(focusForm);
+  const tools = fd.get("available_tools").split(",").map(s => s.trim()).filter(Boolean).map(name => ({ name }));
+  const body = {
+    task_id: fd.get("task_id"),
+    session_id: fd.get("session_id"),
+    available_tools: tools,
+    context: { task: fd.get("context") },
+  };
+  resultPanel.innerHTML = `<h2>Result <span class="spinner"></span></h2>`;
+  try {
+    const res = await fetch("/v1/decisions/focus", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
+    if (!res.ok) throw new Error(await res.text());
+    renderFocusResult(body, await res.json());
+    loadStream();
+  } catch (err) {
+    formError.textContent = err.message;
+    resultPanel.innerHTML = `<h2>Result</h2><div class="empty">Failed.</div>`;
+  }
+});
+
+function statusFor(r) {
+  if (r.kind === "route" && r.validated === false && !r.fallback_used) return "abstained";
+  if (r.fallback_used) return "fallback";
+  if (r.abstained) return "abstained";
+  return "accepted";
+}
+
+async function loadStream() {
+  const streamBody = document.getElementById("streamBody");
+  try {
+    const res = await fetch("/v1/decisions/recent?limit=25");
+    const records = await res.json();
+    if (!records.length) {
+      streamBody.innerHTML = `<tr><td colspan="8" class="empty">No decisions recorded yet.</td></tr>`;
+      return;
+    }
+    streamBody.innerHTML = records.map(r => `
+      <tr>
+        <td class="mono">${new Date(r.created_at).toLocaleTimeString()}</td>
+        <td>${r.kind}</td>
+        <td class="mono">${r.task_id}</td>
+        <td class="mono">${r.offered.length}</td>
+        <td class="mono">${r.selector_choice ?? "—"}</td>
+        <td>${statusBadge(statusFor(r))}</td>
+        <td class="mono">${r.final_choice ?? "—"}</td>
+        <td class="mono">${r.selector_latency_ms != null ? r.selector_latency_ms.toFixed(0) + " ms" : "—"}</td>
+      </tr>
+    `).join("");
+  } catch (err) {
+    streamBody.innerHTML = `<tr><td colspan="8" class="empty">Failed to load: ${err.message}</td></tr>`;
+  }
+}
+
+loadStream();
+setInterval(loadStream, 4000);
+</script>
+</body>
+</html>
