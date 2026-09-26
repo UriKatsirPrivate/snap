@@ -1,8 +1,9 @@
 import logging
+import secrets
 from contextlib import asynccontextmanager
 from functools import lru_cache
 
-from fastapi import BackgroundTasks, Depends, FastAPI
+from fastapi import BackgroundTasks, Depends, FastAPI, Header, HTTPException
 from fastapi.staticfiles import StaticFiles
 
 from app.config import Config, load_config
@@ -44,6 +45,18 @@ def get_tool_executor() -> ToolExecutor:
     return MockToolExecutor()
 
 
+def require_admin_key(
+    x_admin_key: str | None = Header(default=None),
+    config: Config = Depends(get_config),
+) -> None:
+    """Guards destructive endpoints. Fails closed: with no ADMIN_API_KEY set,
+    the endpoint is unusable rather than silently open to anyone."""
+    if not config.admin_api_key:
+        raise HTTPException(status_code=503, detail="Admin API key not configured")
+    if not x_admin_key or not secrets.compare_digest(x_admin_key, config.admin_api_key):
+        raise HTTPException(status_code=401, detail="Invalid or missing X-Admin-Key header")
+
+
 def warm_up_selector() -> None:
     """Pay the first call's TLS handshake and ADC token fetch once at
     startup, so it doesn't land on whichever request happens to be first."""
@@ -82,8 +95,8 @@ def route_decision(
     recorder: DecisionRecorder = Depends(get_decision_recorder),
 ) -> RouteDecisionResponse:
     response, record = decide_route(request, selector)
-    # Recording happens after the response is sent, so a slow recorder
-    # (e.g. BigQuery) never adds latency to the decision itself.
+    # Recording happens after the response is sent, so the recorder's
+    # latency never adds to the decision itself.
     background_tasks.add_task(recorder.record, record)
     return response
 
@@ -120,11 +133,12 @@ def recent_decisions(
     return recorder.recent(limit)
 
 
-@app.delete("/v1/decisions")
+@app.delete("/v1/decisions", dependencies=[Depends(require_admin_key)])
 def clear_decisions(
+    task_id: list[str] | None = None,
     recorder: DecisionRecorder = Depends(get_decision_recorder),
 ) -> dict[str, str]:
-    recorder.clear()
+    recorder.clear(task_id)
     return {"status": "cleared"}
 
 

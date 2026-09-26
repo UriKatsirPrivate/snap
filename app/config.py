@@ -8,9 +8,11 @@ class Config:
     gcp_location: str
     gemini_model: str
     records_backend: str
-    bq_dataset: str
-    bq_table: str
+    cloudsql_instance: str | None
+    cloudsql_database: str
+    cloudsql_user: str | None
     local_records_path: str
+    admin_api_key: str | None
 
 
 def load_config() -> Config:
@@ -19,7 +21,9 @@ def load_config() -> Config:
         gcp_location=os.environ.get("GOOGLE_CLOUD_LOCATION", "global"),
         gemini_model=os.environ.get("GEMINI_MODEL", "gemini-2.5-flash-lite"),
         records_backend=os.environ.get("RECORDS_BACKEND", "local"),
-        bq_dataset=os.environ.get("BQ_DATASET", "snap"),
-        bq_table=os.environ.get("BQ_TABLE", "decisions"),
+        cloudsql_instance=os.environ.get("CLOUDSQL_INSTANCE"),
+        cloudsql_database=os.environ.get("CLOUDSQL_DATABASE", "snap"),
+        cloudsql_user=os.environ.get("CLOUDSQL_USER"),
         local_records_path=os.environ.get("LOCAL_RECORDS_PATH", "data/decisions.jsonl"),
+        admin_api_key=os.environ.get("ADMIN_API_KEY"),
     )

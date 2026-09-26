@@ -10,3 +10,4 @@ NOTES.md
 run.sh
 setup-data-sharing.sh
 .playwright-mcp/
+.DS_Store

@@ -274,7 +274,7 @@ gemini-flash-lite,google,gemini-2.5-flash-light</textarea>
         <h2>Decision stream</h2>
         <div id="clearHistoryArea" style="display:flex; align-items:center; gap:10px;">
           <span id="clearHistoryConfirm" style="display:none; font-size:12.5px; color:var(--muted);">
-            Clear all decision history?
+            <span id="clearHistoryLabel">Clear all decision history?</span>
             <button id="clearHistoryYes" class="run" style="width:auto; margin-top:0; padding:4px 10px; background:#dc2626; color:#fff;">Yes, clear</button>
             <button id="clearHistoryNo" class="run" style="width:auto; margin-top:0; padding:4px 10px; background:rgba(255,255,255,0.08); color:var(--text);">Cancel</button>
           </span>
@@ -502,11 +502,14 @@ function renderLatencyStats(records) {
   `;
 }
 
+let latestRecords = [];
+
 async function loadStream() {
   const streamBody = document.getElementById("streamBody");
   try {
     const res = await fetch("/v1/decisions/recent?limit=25");
     const records = await res.json();
+    latestRecords = records;
     renderLatencyStats(records);
     if (!records.length) {
       streamBody.innerHTML = `<tr><td colspan="9" class="empty">No decisions recorded yet.</td></tr>`;
@@ -532,8 +535,19 @@ async function loadStream() {
 
 const clearBtn = document.getElementById("clearHistoryBtn");
 const clearConfirm = document.getElementById("clearHistoryConfirm");
+const clearLabel = document.getElementById("clearHistoryLabel");
+let clearTaskIds = [];
 
 clearBtn.addEventListener("click", () => {
+  clearTaskIds = [...new Set(latestRecords.map(r => r.task_id))];
+  if (!clearTaskIds.length) {
+    formError.textContent = "No decisions to clear.";
+    return;
+  }
+  const desc = clearTaskIds.length === 1
+    ? `task "${clearTaskIds[0]}"`
+    : `${clearTaskIds.length} tasks shown below`;
+  clearLabel.textContent = `Clear history for ${desc}?`;
   clearBtn.style.display = "none";
   clearConfirm.style.display = "inline-flex";
   clearConfirm.style.alignItems = "center";
@@ -548,8 +562,18 @@ document.getElementById("clearHistoryNo").addEventListener("click", () => {
 document.getElementById("clearHistoryYes").addEventListener("click", async () => {
   clearConfirm.style.display = "none";
   clearBtn.style.display = "";
+  const adminKey = window.prompt("Admin key required to clear history:");
+  if (!adminKey) return;
   try {
-    await fetch("/v1/decisions", { method: "DELETE" });
+    const params = clearTaskIds.map(id => `task_id=${encodeURIComponent(id)}`).join("&");
+    const res = await fetch(`/v1/decisions?${params}`, {
+      method: "DELETE",
+      headers: { "X-Admin-Key": adminKey },
+    });
+    if (!res.ok) {
+      const body = await res.json().catch(() => ({}));
+      throw new Error(body.detail || `HTTP ${res.status}`);
+    }
     loadStream();
   } catch (err) {
     formError.textContent = "Failed to clear history: " + err.message;
