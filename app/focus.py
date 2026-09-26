@@ -18,6 +18,7 @@ def decide_focus(
     started = time.perf_counter()
     result = selector.select(FOCUS_IDS, request.context)
     latency_ms = (time.perf_counter() - started) * 1000
+    cost_usd = result.raw.get("cost_usd")
 
     validated = (not result.abstained) and result.choice_id in FOCUS_IDS
     fallback_used = not validated
@@ -39,6 +40,7 @@ def decide_focus(
         fallback_used=fallback_used,
         final_choice=focus,
         selector_latency_ms=latency_ms,
+        selector_cost_usd=cost_usd,
     )
     return (
         FocusDecisionResponse(
@@ -50,6 +52,7 @@ def decide_focus(
             fallback_used=fallback_used,
             record_id=record.id,
             selector_latency_ms=latency_ms,
+            selector_cost_usd=cost_usd,
         ),
         record,
     )

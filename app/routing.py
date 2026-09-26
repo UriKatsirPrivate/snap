@@ -41,6 +41,7 @@ def decide_route(
     started = time.perf_counter()
     result = selector.select(list(by_id.keys()), request.context)
     latency_ms = (time.perf_counter() - started) * 1000
+    cost_usd = result.raw.get("cost_usd")
 
     # Re-validate: the selector's choice must still be one of the candidates
     # the host actually offered.
@@ -66,6 +67,7 @@ def decide_route(
         fallback_used=fallback_used,
         final_choice=chosen.id if chosen else None,
         selector_latency_ms=latency_ms,
+        selector_cost_usd=cost_usd,
     )
     return (
         RouteDecisionResponse(
@@ -75,6 +77,7 @@ def decide_route(
             fallback_used=fallback_used,
             record_id=record.id,
             selector_latency_ms=latency_ms,
+            selector_cost_usd=cost_usd,
         ),
         record,
     )

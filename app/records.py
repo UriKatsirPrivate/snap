@@ -56,6 +56,7 @@ class BigQueryRecorder(DecisionRecorder):
         {"name": "fallback_used", "type": "BOOLEAN", "mode": "REQUIRED"},
         {"name": "final_choice", "type": "STRING", "mode": "NULLABLE"},
         {"name": "selector_latency_ms", "type": "FLOAT", "mode": "NULLABLE"},
+        {"name": "selector_cost_usd", "type": "FLOAT", "mode": "NULLABLE"},
         {"name": "created_at", "type": "TIMESTAMP", "mode": "REQUIRED"},
     ]
 

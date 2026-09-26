@@ -31,6 +31,7 @@ class RouteDecisionResponse(BaseModel):
     fallback_used: bool
     record_id: str
     selector_latency_ms: float | None = None
+    selector_cost_usd: float | None = None
 
 
 class ToolDef(BaseModel):
@@ -54,6 +55,7 @@ class FocusDecisionResponse(BaseModel):
     fallback_used: bool
     record_id: str
     selector_latency_ms: float | None = None
+    selector_cost_usd: float | None = None
 
 
 class SelectionResult(BaseModel):
@@ -73,6 +75,7 @@ class DecisionRecord(BaseModel):
     fallback_used: bool
     final_choice: str | None
     selector_latency_ms: float | None = None
+    selector_cost_usd: float | None = None
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 

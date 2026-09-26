@@ -36,6 +36,14 @@ class GeminiSelector(Selector):
 
     _ABSTAIN_SENTINEL = "__ABSTAIN__"
 
+    # Standard-tier list price per Google's Gemini API pricing page
+    # (https://ai.google.dev/gemini-api/docs/pricing), text/image/video input.
+    # Only the model this service is actually configured to run as a selector
+    # needs an entry -- an unpriced model just means cost is left unreported.
+    _PRICE_PER_MILLION_TOKENS_USD = {
+        "gemini-2.5-flash-lite": {"input": 0.10, "output": 0.40},
+    }
+
     def __init__(self, config: Config):
         from google import genai
 
@@ -80,4 +88,16 @@ class GeminiSelector(Selector):
         choice = (response.text or "").strip()
         abstain = choice == self._ABSTAIN_SENTINEL or choice not in options
         choice_id = choice if not abstain else None
-        return SelectionResult(choice_id=choice_id, abstained=abstain, raw={"choice": choice})
+        return SelectionResult(
+            choice_id=choice_id,
+            abstained=abstain,
+            raw={"choice": choice, "cost_usd": self._cost_usd(response.usage_metadata)},
+        )
+
+    def _cost_usd(self, usage: Any) -> float | None:
+        prices = self._PRICE_PER_MILLION_TOKENS_USD.get(self._model)
+        if usage is None or prices is None:
+            return None
+        input_tokens = usage.prompt_token_count or 0
+        output_tokens = usage.candidates_token_count or 0
+        return (input_tokens * prices["input"] + output_tokens * prices["output"]) / 1_000_000

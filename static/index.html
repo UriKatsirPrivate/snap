@@ -6,64 +6,80 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <style>
   :root {
-    --bg: #f7f7f5;
-    --panel: #ffffff;
-    --border: #e4e4e1;
-    --text: #1c1c1a;
-    --muted: #767671;
-    --accent: #2563eb;
-    --ok: #16a34a;
-    --warn: #d97706;
-    --off: #9ca3af;
+    --bg: #050914;
+    --panel: rgba(255,255,255,0.035);
+    --border: rgba(255,255,255,0.08);
+    --text: rgba(233,240,255,0.92);
+    --muted: rgba(233,240,255,0.4);
+    --accent: #7df9c2;
+    --accent-text: #04140d;
+    --ok: #7df9c2;
+    --ok-bg: rgba(125,249,194,0.14);
+    --warn: #ff8a7a;
+    --warn-bg: rgba(255,138,122,0.16);
+    --off: rgba(233,240,255,0.38);
+    --off-bg: rgba(233,240,255,0.08);
+    --pinned: #9db4ff;
+    --pinned-bg: rgba(157,180,255,0.16);
+    --err: #ff5a5a;
+    --err-bg: rgba(255,90,90,0.16);
   }
   * { box-sizing: border-box; }
   body {
     margin: 0;
-    background: var(--bg);
+    min-height: 100vh;
+    background:
+      radial-gradient(ellipse at top right, rgba(125,249,194,0.10), transparent 55%),
+      radial-gradient(ellipse at bottom left, rgba(255,138,122,0.08), transparent 55%),
+      var(--bg);
     color: var(--text);
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     font-size: 14px;
+    font-weight: 300;
   }
   header {
-    padding: 20px 28px;
-    border-bottom: 1px solid var(--border);
+    padding: 24px 28px 18px;
     display: flex;
     align-items: baseline;
     gap: 10px;
   }
-  header h1 { margin: 0; font-size: 18px; }
-  header .sub { color: var(--muted); font-size: 13px; }
+  header h1 { margin: 0; font-size: 20px; font-weight: 200; }
+  header .sub { color: var(--muted); font-size: 12.5px; }
   main {
     display: grid;
     grid-template-columns: 380px 1fr;
     gap: 20px;
-    padding: 20px 28px;
+    padding: 0 28px 20px;
     align-items: start;
   }
   .panel {
     background: var(--panel);
     border: 1px solid var(--border);
-    border-radius: 10px;
+    border-radius: 12px;
     padding: 16px;
+    backdrop-filter: blur(10px);
   }
-  .panel h2 { margin: 0 0 12px; font-size: 14px; }
+  .panel h2 { margin: 0 0 12px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted); font-weight: 600; }
   .tabs { display: flex; gap: 4px; margin-bottom: 12px; }
   .tab {
     flex: 1;
     text-align: center;
     padding: 6px;
     border: 1px solid var(--border);
-    border-radius: 6px;
+    border-radius: 8px;
     cursor: pointer;
     color: var(--muted);
+    font-size: 12.5px;
   }
-  .tab.active { background: var(--accent); color: white; border-color: var(--accent); }
-  label { display: block; margin: 10px 0 4px; color: var(--muted); font-size: 12px; }
+  .tab.active { background: var(--accent); color: var(--accent-text); border-color: var(--accent); font-weight: 700; }
+  label { display: block; margin: 10px 0 4px; color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; }
   input, textarea {
     width: 100%;
-    padding: 6px 8px;
+    padding: 7px 9px;
+    background: rgba(255,255,255,0.03);
     border: 1px solid var(--border);
-    border-radius: 6px;
+    border-radius: 7px;
+    color: var(--text);
     font-family: inherit;
     font-size: 13px;
   }
@@ -73,48 +89,49 @@
     width: 100%;
     padding: 9px;
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
     background: var(--accent);
-    color: white;
-    font-weight: 600;
+    color: var(--accent-text);
+    font-weight: 700;
     cursor: pointer;
   }
-  button.run:disabled { background: var(--off); cursor: default; }
+  button.run:disabled { background: var(--off); color: var(--bg); cursor: default; }
   .hint { color: var(--muted); font-size: 11px; margin-top: 2px; }
 
   .badge {
     display: inline-block;
-    padding: 2px 8px;
+    padding: 2px 9px;
     border-radius: 999px;
-    font-size: 11px;
-    font-weight: 600;
+    font-size: 10.5px;
+    font-weight: 700;
     text-transform: uppercase;
+    letter-spacing: 0.03em;
   }
-  .badge.selected, .badge.accepted { background: #dcfce7; color: var(--ok); }
-  .badge.fallback { background: #fef3c7; color: var(--warn); }
-  .badge.abstained { background: #f3f4f6; color: var(--off); }
-  .badge.pinned { background: #dbeafe; color: var(--accent); }
-  .badge.rejected { background: #fee2e2; color: #dc2626; }
-  .badge.latency { background: #ede9fe; color: #6d28d9; font-family: ui-monospace, monospace; text-transform: none; }
+  .badge.selected, .badge.accepted { background: var(--ok-bg); color: var(--ok); }
+  .badge.fallback { background: var(--warn-bg); color: var(--warn); }
+  .badge.abstained { background: var(--off-bg); color: var(--off); }
+  .badge.pinned { background: var(--pinned-bg); color: var(--pinned); }
+  .badge.rejected { background: var(--err-bg); color: var(--err); }
+  .badge.latency { background: rgba(255,255,255,0.09); color: var(--text); font-family: ui-monospace, monospace; text-transform: none; }
 
   #resultPanel .empty { color: var(--muted); }
   .option-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 7px 10px;
+    padding: 8px 10px;
     border: 1px solid var(--border);
-    border-radius: 6px;
+    border-radius: 8px;
     margin-bottom: 6px;
     font-family: ui-monospace, monospace;
     font-size: 12.5px;
   }
-  .option-row.chosen { border-color: var(--ok); background: #f0fdf4; }
+  .option-row.chosen { border-color: var(--ok); background: var(--ok-bg); }
   .option-row .mark { color: var(--ok); font-weight: 700; }
 
   table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
   th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--border); white-space: nowrap; }
-  th { color: var(--muted); font-weight: 600; }
+  th { color: var(--muted); font-weight: 600; font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.04em; }
   td.mono { font-family: ui-monospace, monospace; }
   .stream-wrap { max-height: 480px; overflow: auto; }
   .spinner {
@@ -126,7 +143,7 @@
     animation: spin 0.7s linear infinite;
   }
   @keyframes spin { to { transform: rotate(360deg); } }
-  .error { color: #dc2626; font-size: 12.5px; margin-top: 8px; }
+  .error { color: var(--err); font-size: 12.5px; margin-top: 8px; }
   .help {
     display: inline-block;
     width: 13px; height: 13px;
@@ -191,16 +208,16 @@ gemini-flash-lite,google,gemini-2.5-flash-light</textarea>
 
   <main style="grid-template-columns: 1fr; padding-top: 0;">
     <div class="panel">
-      <div id="latencyStats" style="font-size:18px; font-weight:600; margin-bottom:14px;">No latency data yet.</div>
+      <div id="latencyStats" style="font-size:18px; font-weight:600; margin-bottom:14px; display:flex; align-items:baseline; gap:22px; flex-wrap:wrap; row-gap:6px;">No latency data yet.</div>
       <div style="display:flex; align-items:center; justify-content:space-between; gap:12px;">
         <h2>Decision stream</h2>
         <div id="clearHistoryArea" style="display:flex; align-items:center; gap:10px;">
           <span id="clearHistoryConfirm" style="display:none; font-size:12.5px; color:var(--muted);">
             Clear all decision history?
-            <button id="clearHistoryYes" class="run" style="width:auto; margin-top:0; padding:4px 10px; background:#dc2626;">Yes, clear</button>
-            <button id="clearHistoryNo" class="run" style="width:auto; margin-top:0; padding:4px 10px; background:var(--off);">Cancel</button>
+            <button id="clearHistoryYes" class="run" style="width:auto; margin-top:0; padding:4px 10px; background:#dc2626; color:#fff;">Yes, clear</button>
+            <button id="clearHistoryNo" class="run" style="width:auto; margin-top:0; padding:4px 10px; background:rgba(255,255,255,0.08); color:var(--text);">Cancel</button>
           </span>
-          <button id="clearHistoryBtn" class="run" style="width:auto; margin-top:0; padding:6px 12px; background:#dc2626;">Clear history</button>
+          <button id="clearHistoryBtn" class="run" style="width:auto; margin-top:0; padding:6px 12px; background:#dc2626; color:#fff;">Clear history</button>
         </div>
       </div>
       <div class="stream-wrap">
@@ -215,10 +232,11 @@ gemini-flash-lite,google,gemini-2.5-flash-light</textarea>
               <th>Status<span class="help" title="accepted = Gemini's pick was used as-is. fallback = pick was invalid/abstained, fallback used instead. abstained = invalid pick and no fallback available.">?</span></th>
               <th>Final<span class="help" title="What the host actually used after validating Gemini's choice.">?</span></th>
               <th>Selector time<span class="help" title="Wall-clock time the Gemini selector call took, in ms.">?</span></th>
+              <th>Selector cost<span class="help" title="Estimated USD cost of this selector call, based on Gemini token usage and the configured selector model's list price.">?</span></th>
             </tr>
           </thead>
           <tbody id="streamBody">
-            <tr><td colspan="8" class="empty">No decisions recorded yet.</td></tr>
+            <tr><td colspan="9" class="empty">No decisions recorded yet.</td></tr>
           </tbody>
         </table>
       </div>
@@ -249,6 +267,11 @@ function latencyBadge(ms) {
   return `<span class="badge latency">${ms.toFixed(0)} ms</span>`;
 }
 
+function costBadge(usd) {
+  if (usd === null || usd === undefined) return "";
+  return `<span class="badge latency">$${usd.toFixed(6)}</span>`;
+}
+
 function renderRouteResult(req, resp) {
   const rows = req.candidates.map(c => {
     const isChosen = resp.chosen && resp.chosen.id === c.id;
@@ -258,7 +281,7 @@ function renderRouteResult(req, resp) {
     </div>`;
   }).join("");
   resultPanel.innerHTML = `
-    <h2>Result ${statusBadge(resp.decision)} ${latencyBadge(resp.selector_latency_ms)}</h2>
+    <h2>Result ${statusBadge(resp.decision)} ${latencyBadge(resp.selector_latency_ms)} ${costBadge(resp.selector_cost_usd)}</h2>
     ${rows}
     <div class="hint" style="margin-top:10px;">record_id: ${resp.record_id}</div>
   `;
@@ -274,7 +297,7 @@ function renderFocusResult(req, resp) {
     </div>`;
   }).join("");
   resultPanel.innerHTML = `
-    <h2>Result ${statusBadge(resp.decision)} ${latencyBadge(resp.selector_latency_ms)}</h2>
+    <h2>Result ${statusBadge(resp.decision)} ${latencyBadge(resp.selector_latency_ms)} ${costBadge(resp.selector_cost_usd)}</h2>
     ${rows}
     <div class="hint" style="margin-top:10px;">tools: ${resp.tools.join(", ") || "(none)"}</div>
     <div class="hint">record_id: ${resp.record_id}</div>
@@ -359,7 +382,15 @@ function renderLatencyStats(records) {
     return;
   }
   const avg = latencies.reduce((a, b) => a + b, 0) / latencies.length;
-  el.innerHTML = `avg ${avg.toFixed(0)} ms · median ${median(latencies).toFixed(0)} ms <span style="color:var(--muted); font-weight:400; font-size:13px;">(n=${latencies.length})</span>`;
+  const costs = records.map(r => r.selector_cost_usd).filter(v => v != null);
+  const totalCost = costs.reduce((a, b) => a + b, 0);
+  const costPart = costs.length
+    ? `<span>$${totalCost.toFixed(6)} selector cost <span style="color:var(--muted); font-weight:400; font-size:13px;">(last ${costs.length} shown)</span></span>`
+    : "";
+  el.innerHTML = `
+    <span>avg ${avg.toFixed(0)} ms &nbsp;&middot;&nbsp; median ${median(latencies).toFixed(0)} ms <span style="color:var(--muted); font-weight:400; font-size:13px;">(n=${latencies.length})</span></span>
+    ${costPart}
+  `;
 }
 
 async function loadStream() {
@@ -369,7 +400,7 @@ async function loadStream() {
     const records = await res.json();
     renderLatencyStats(records);
     if (!records.length) {
-      streamBody.innerHTML = `<tr><td colspan="8" class="empty">No decisions recorded yet.</td></tr>`;
+      streamBody.innerHTML = `<tr><td colspan="9" class="empty">No decisions recorded yet.</td></tr>`;
       return;
     }
     streamBody.innerHTML = records.map(r => `
@@ -382,10 +413,11 @@ async function loadStream() {
         <td>${statusBadge(statusFor(r))}</td>
         <td class="mono">${r.final_choice ?? "—"}</td>
         <td class="mono">${r.selector_latency_ms != null ? r.selector_latency_ms.toFixed(0) + " ms" : "—"}</td>
+        <td class="mono">${r.selector_cost_usd != null ? "$" + r.selector_cost_usd.toFixed(6) : "—"}</td>
       </tr>
     `).join("");
   } catch (err) {
-    streamBody.innerHTML = `<tr><td colspan="8" class="empty">Failed to load: ${err.message}</td></tr>`;
+    streamBody.innerHTML = `<tr><td colspan="9" class="empty">Failed to load: ${err.message}</td></tr>`;
   }
 }
 
