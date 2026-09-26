@@ -11,3 +11,4 @@ run.sh
 setup-data-sharing.sh
 .playwright-mcp/
 .DS_Store
+scripts/get_admin_key.sh
