@@ -1,0 +1,2474 @@
+{
+  "name": "tier",
+  "backend": "local (in-process, model=gemini-2.5-flash-lite)",
+  "mode": "local",
+  "recorded_at": "20260926T110358Z",
+  "summary": {
+    "cases": 80,
+    "repeats": 3,
+    "total_calls": 240,
+    "correct": 144,
+    "match_rate": 0.6,
+    "abstained": 0,
+    "per_label": {
+      "SIMPLE": {
+        "correct": 49,
+        "total": 60
+      },
+      "MEDIUM": {
+        "correct": 11,
+        "total": 60
+      },
+      "COMPLEX": {
+        "correct": 34,
+        "total": 60
+      },
+      "REASONING": {
+        "correct": 50,
+        "total": 60
+      }
+    },
+    "confusion_matrix": {
+      "SIMPLE": {
+        "SIMPLE": 49,
+        "MEDIUM": 7,
+        "COMPLEX": 0,
+        "REASONING": 4,
+        "abstain": 0
+      },
+      "MEDIUM": {
+        "SIMPLE": 26,
+        "MEDIUM": 11,
+        "COMPLEX": 10,
+        "REASONING": 13,
+        "abstain": 0
+      },
+      "COMPLEX": {
+        "SIMPLE": 0,
+        "MEDIUM": 2,
+        "COMPLEX": 34,
+        "REASONING": 24,
+        "abstain": 0
+      },
+      "REASONING": {
+        "SIMPLE": 0,
+        "MEDIUM": 0,
+        "COMPLEX": 10,
+        "REASONING": 50,
+        "abstain": 0
+      }
+    },
+    "latency_ms": {
+      "median": 345.09574999992765,
+      "p95": 483.9797586500026,
+      "min": 245.64379200000985,
+      "max": 1962.0790419994592
+    },
+    "cost_usd": {
+      "total": 0.0020423000000000004,
+      "priced_calls": 240
+    }
+  },
+  "trials": [
+    {
+      "task_id": "cplx-17",
+      "task": "Redesign the rate limiter so it works correctly across multiple regions with independent clocks.",
+      "expected": "COMPLEX",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 1895.2066669999112,
+      "cost_usd": 9.100000000000001e-06
+    },
+    {
+      "task_id": "cplx-05",
+      "task": "Untangle the circular dependency between the billing and notifications modules.",
+      "expected": "COMPLEX",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 314.9420829995506,
+      "cost_usd": 8.7e-06
+    },
+    {
+      "task_id": "cplx-03",
+      "task": "Redesign the database schema to support multi-tenancy without a full data migration downtime.",
+      "expected": "COMPLEX",
+      "predicted": "COMPLEX",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 455.1302500003658,
+      "cost_usd": 8.900000000000001e-06
+    },
+    {
+      "task_id": "cplx-11",
+      "task": "Split the shared database between two services being separated into independent deployables.",
+      "expected": "COMPLEX",
+      "predicted": "COMPLEX",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 355.3280000005543,
+      "cost_usd": 8.5e-06
+    },
+    {
+      "task_id": "med-05",
+      "task": "Write a unit test for this addition function.",
+      "expected": "MEDIUM",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 458.40175000012096,
+      "cost_usd": 8.400000000000001e-06
+    },
+    {
+      "task_id": "med-12",
+      "task": "Add type hints to this function's signature.",
+      "expected": "MEDIUM",
+      "predicted": "COMPLEX",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 333.2467499994891,
+      "cost_usd": 8.100000000000002e-06
+    },
+    {
+      "task_id": "reas-09",
+      "task": "Work out the optimal batch size that minimizes total processing time given both per-item and per-batch overhead.",
+      "expected": "REASONING",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 292.69037499943806,
+      "cost_usd": 9.699999999999999e-06
+    },
+    {
+      "task_id": "simp-12",
+      "task": "What's the plural of 'octopus'?",
+      "expected": "SIMPLE",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 473.1947919999584,
+      "cost_usd": 8.5e-06
+    },
+    {
+      "task_id": "reas-07",
+      "task": "We want to minimize cost and maximize availability at the same time for this deployment -- find the best tradeoff point.",
+      "expected": "REASONING",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 467.02745800030243,
+      "cost_usd": 9.699999999999999e-06
+    },
+    {
+      "task_id": "cplx-02",
+      "task": "Refactor the payment service to support multiple currencies across all downstream consumers.",
+      "expected": "COMPLEX",
+      "predicted": "COMPLEX",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 351.0905000002822,
+      "cost_usd": 8.5e-06
+    },
+    {
+      "task_id": "reas-16",
+      "task": "Prove that this hashing scheme has no collisions for the given input domain.",
+      "expected": "REASONING",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 292.35166699982074,
+      "cost_usd": 8.900000000000001e-06
+    },
+    {
+      "task_id": "simp-09",
+      "task": "What's the syntax for a Python list comprehension?",
+      "expected": "SIMPLE",
+      "predicted": "MEDIUM",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 394.42816599967045,
+      "cost_usd": 7.800000000000002e-06
+    },
+    {
+      "task_id": "med-18",
+      "task": "Add a try/except around this file read.",
+      "expected": "MEDIUM",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 375.5254159996184,
+      "cost_usd": 7.7e-06
+    },
+    {
+      "task_id": "med-10",
+      "task": "Draft a commit message for this small bug fix.",
+      "expected": "MEDIUM",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 388.0859999999302,
+      "cost_usd": 7.7e-06
+    },
+    {
+      "task_id": "simp-02",
+      "task": "What does the acronym API stand for?",
+      "expected": "SIMPLE",
+      "predicted": "MEDIUM",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 346.5315829998872,
+      "cost_usd": 7.500000000000001e-06
+    },
+    {
+      "task_id": "simp-15",
+      "task": "What's the keyboard shortcut to copy text on Windows?",
+      "expected": "SIMPLE",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 326.85729100012395,
+      "cost_usd": 7.9e-06
+    },
+    {
+      "task_id": "cplx-13",
+      "task": "Change the event schema in a way that keeps both old and new consumers working during the transition.",
+      "expected": "COMPLEX",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 363.0116670001371,
+      "cost_usd": 9.400000000000001e-06
+    },
+    {
+      "task_id": "cplx-20",
+      "task": "Change the ID generation strategy from auto-increment to UUID across a system with existing external references.",
+      "expected": "COMPLEX",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 341.3345409999238,
+      "cost_usd": 9.400000000000001e-06
+    },
+    {
+      "task_id": "reas-04",
+      "task": "Prove that this sorting algorithm is stable.",
+      "expected": "REASONING",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 386.05633299994224,
+      "cost_usd": 8.3e-06
+    },
+    {
+      "task_id": "simp-19",
+      "task": "What's the maximum value of a signed 32-bit integer?",
+      "expected": "SIMPLE",
+      "predicted": "MEDIUM",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 338.4241249996194,
+      "cost_usd": 8.3e-06
+    },
+    {
+      "task_id": "cplx-08",
+      "task": "Reconcile the two divergent user schemas from the merged codebases into one canonical model.",
+      "expected": "COMPLEX",
+      "predicted": "COMPLEX",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 314.4313329994475,
+      "cost_usd": 8.900000000000001e-06
+    },
+    {
+      "task_id": "simp-03",
+      "task": "What's the default port for HTTPS?",
+      "expected": "SIMPLE",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 350.9568749996106,
+      "cost_usd": 7.600000000000001e-06
+    },
+    {
+      "task_id": "reas-19",
+      "task": "Prove that rolling back this migration is safe even if it's interrupted halfway through.",
+      "expected": "REASONING",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 348.05087499989895,
+      "cost_usd": 9.2e-06
+    },
+    {
+      "task_id": "reas-15",
+      "task": "Balance the conflicting goals of minimizing bundle size and maximizing runtime performance for this build.",
+      "expected": "REASONING",
+      "predicted": "COMPLEX",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 365.5358750002051,
+      "cost_usd": 8.700000000000001e-06
+    },
+    {
+      "task_id": "med-04",
+      "task": "Add a docstring to this function.",
+      "expected": "MEDIUM",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 245.90058299963857,
+      "cost_usd": 7.500000000000001e-06
+    },
+    {
+      "task_id": "simp-08",
+      "task": "What does CPU stand for?",
+      "expected": "SIMPLE",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 295.83166599968536,
+      "cost_usd": 7.3e-06
+    },
+    {
+      "task_id": "simp-11",
+      "task": "What's the ASCII code for the letter 'A'?",
+      "expected": "SIMPLE",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 282.39912499975617,
+      "cost_usd": 8e-06
+    },
+    {
+      "task_id": "reas-01",
+      "task": "Prove that this recursive function always terminates.",
+      "expected": "REASONING",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 549.3795000002137,
+      "cost_usd": 8.3e-06
+    },
+    {
+      "task_id": "med-07",
+      "task": "Write a SQL query to select all users created in the last 7 days.",
+      "expected": "MEDIUM",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 371.6576670003633,
+      "cost_usd": 9.100000000000001e-06
+    },
+    {
+      "task_id": "simp-16",
+      "task": "What's the default branch name convention in modern git repos?",
+      "expected": "SIMPLE",
+      "predicted": "MEDIUM",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 428.78325000037876,
+      "cost_usd": 8e-06
+    },
+    {
+      "task_id": "cplx-16",
+      "task": "Consolidate three overlapping logging systems into one without losing any existing alerting.",
+      "expected": "COMPLEX",
+      "predicted": "COMPLEX",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 378.5974160000478,
+      "cost_usd": 8.6e-06
+    },
+    {
+      "task_id": "reas-12",
+      "task": "We need low latency for reads and strong durability for writes, but the two requirements pull the storage engine choice in opposite directions -- resolve it.",
+      "expected": "REASONING",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 473.2491659997322,
+      "cost_usd": 1.0300000000000001e-05
+    },
+    {
+      "task_id": "med-06",
+      "task": "Draft a one-paragraph summary of what this PR changes.",
+      "expected": "MEDIUM",
+      "predicted": "MEDIUM",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 383.5553749995597,
+      "cost_usd": 7.9e-06
+    },
+    {
+      "task_id": "reas-18",
+      "task": "We want to reduce vendor lock-in but also minimize integration cost -- these pull in opposite directions, find the right balance.",
+      "expected": "REASONING",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 304.88270899968484,
+      "cost_usd": 1e-05
+    },
+    {
+      "task_id": "simp-01",
+      "task": "What's the HTTP status code for 'not found'?",
+      "expected": "SIMPLE",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 349.7257500002888,
+      "cost_usd": 8e-06
+    },
+    {
+      "task_id": "simp-04",
+      "task": "What's the capital of France?",
+      "expected": "SIMPLE",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 478.2227089999651,
+      "cost_usd": 7.500000000000001e-06
+    },
+    {
+      "task_id": "simp-17",
+      "task": "What's the SI unit for measuring force?",
+      "expected": "SIMPLE",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 362.5097079993793,
+      "cost_usd": 7.7e-06
+    },
+    {
+      "task_id": "reas-17",
+      "task": "Determine whether this scheduling algorithm can starve a given class of tasks indefinitely.",
+      "expected": "REASONING",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 481.5471249994516,
+      "cost_usd": 8.900000000000001e-06
+    },
+    {
+      "task_id": "med-09",
+      "task": "Write a bash one-liner to count lines in a file.",
+      "expected": "MEDIUM",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 378.50350000007893,
+      "cost_usd": 8e-06
+    },
+    {
+      "task_id": "reas-20",
+      "task": "Optimize this algorithm's memory usage without increasing its time complexity.",
+      "expected": "REASONING",
+      "predicted": "COMPLEX",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 367.98916699990514,
+      "cost_usd": 8.400000000000001e-06
+    },
+    {
+      "task_id": "cplx-09",
+      "task": "Design a backward-compatible way to change the primary key type on a table with foreign keys in six other tables.",
+      "expected": "COMPLEX",
+      "predicted": "COMPLEX",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 364.60204100058036,
+      "cost_usd": 9.4e-06
+    },
+    {
+      "task_id": "simp-14",
+      "task": "What does JSON stand for?",
+      "expected": "SIMPLE",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 297.56675000044197,
+      "cost_usd": 7.3e-06
+    },
+    {
+      "task_id": "cplx-01",
+      "task": "Migrate the authentication system from session cookies to JWT without breaking existing logged-in users.",
+      "expected": "COMPLEX",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 341.9234590000997,
+      "cost_usd": 9.3e-06
+    },
+    {
+      "task_id": "med-20",
+      "task": "Draft a one-line docstring for this class.",
+      "expected": "MEDIUM",
+      "predicted": "MEDIUM",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 302.31958299918915,
+      "cost_usd": 7.800000000000002e-06
+    },
+    {
+      "task_id": "med-01",
+      "task": "Write a function that reverses a string.",
+      "expected": "MEDIUM",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 299.77204199985863,
+      "cost_usd": 7.500000000000001e-06
+    },
+    {
+      "task_id": "reas-10",
+      "task": "Determine the minimum number of servers needed to guarantee no request is dropped under the worst-case load pattern.",
+      "expected": "REASONING",
+      "predicted": "COMPLEX",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 261.12012500016135,
+      "cost_usd": 9.200000000000002e-06
+    },
+    {
+      "task_id": "med-03",
+      "task": "Write a regex that matches a US phone number.",
+      "expected": "MEDIUM",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 536.8365000003905,
+      "cost_usd": 8.5e-06
+    },
+    {
+      "task_id": "cplx-15",
+      "task": "Resolve the inconsistency between the cache's TTL and the database's eventual consistency window.",
+      "expected": "COMPLEX",
+      "predicted": "COMPLEX",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 285.6498749997627,
+      "cost_usd": 8.900000000000001e-06
+    },
+    {
+      "task_id": "med-16",
+      "task": "Draft a Slack message announcing a scheduled maintenance window.",
+      "expected": "MEDIUM",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 339.259583999592,
+      "cost_usd": 7.7e-06
+    },
+    {
+      "task_id": "med-11",
+      "task": "Write a function to check if a number is prime.",
+      "expected": "MEDIUM",
+      "predicted": "MEDIUM",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 420.6000000003769,
+      "cost_usd": 7.800000000000002e-06
+    },
+    {
+      "task_id": "med-02",
+      "task": "Draft a short email letting the team know the deploy is delayed by an hour.",
+      "expected": "MEDIUM",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 283.61075000066194,
+      "cost_usd": 8.3e-06
+    },
+    {
+      "task_id": "cplx-04",
+      "task": "Coordinate a rollout of a new caching layer across three services that share the same cache keys.",
+      "expected": "COMPLEX",
+      "predicted": "MEDIUM",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 251.635124999666,
+      "cost_usd": 8.5e-06
+    },
+    {
+      "task_id": "simp-05",
+      "task": "How many bytes are in a kilobyte?",
+      "expected": "SIMPLE",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 343.611792000047,
+      "cost_usd": 7.7e-06
+    },
+    {
+      "task_id": "cplx-07",
+      "task": "Update the API versioning scheme in a way that doesn't break any of the five existing client SDKs.",
+      "expected": "COMPLEX",
+      "predicted": "COMPLEX",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 293.8785830001507,
+      "cost_usd": 9.4e-06
+    },
+    {
+      "task_id": "simp-07",
+      "task": "What's the boiling point of water in Celsius?",
+      "expected": "SIMPLE",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 247.79437500001222,
+      "cost_usd": 7.800000000000002e-06
+    },
+    {
+      "task_id": "simp-20",
+      "task": "What's the file extension for a compiled Java class?",
+      "expected": "SIMPLE",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 263.7136670000473,
+      "cost_usd": 7.9e-06
+    },
+    {
+      "task_id": "simp-10",
+      "task": "What command lists files in a directory on Linux?",
+      "expected": "SIMPLE",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 509.64016600028117,
+      "cost_usd": 7.7e-06
+    },
+    {
+      "task_id": "cplx-18",
+      "task": "Migrate the search index to a new provider while keeping search results consistent during the cutover.",
+      "expected": "COMPLEX",
+      "predicted": "COMPLEX",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 399.56783399975393,
+      "cost_usd": 9.000000000000002e-06
+    },
+    {
+      "task_id": "reas-13",
+      "task": "Show that this distributed lock implementation can't have two holders at once.",
+      "expected": "REASONING",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 311.82862500008923,
+      "cost_usd": 9e-06
+    },
+    {
+      "task_id": "reas-14",
+      "task": "Find the theoretical lower bound on the number of comparisons needed to sort this input.",
+      "expected": "REASONING",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 310.7210419993862,
+      "cost_usd": 9.100000000000001e-06
+    },
+    {
+      "task_id": "reas-11",
+      "task": "Prove that two given regular expressions match the same language.",
+      "expected": "REASONING",
+      "predicted": "COMPLEX",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 341.4199170001666,
+      "cost_usd": 8.200000000000001e-06
+    },
+    {
+      "task_id": "med-15",
+      "task": "Write a function that converts Celsius to Fahrenheit.",
+      "expected": "MEDIUM",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 391.92662500045117,
+      "cost_usd": 7.600000000000001e-06
+    },
+    {
+      "task_id": "cplx-19",
+      "task": "Restructure the test suite so integration tests don't depend on execution order across modules.",
+      "expected": "COMPLEX",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 503.46950000039215,
+      "cost_usd": 9.3e-06
+    },
+    {
+      "task_id": "med-13",
+      "task": "Write a short changelog entry for this release.",
+      "expected": "MEDIUM",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 292.95954200006236,
+      "cost_usd": 7.7e-06
+    },
+    {
+      "task_id": "simp-13",
+      "task": "What's the time zone abbreviation for Pacific Standard Time?",
+      "expected": "SIMPLE",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 291.46154199952434,
+      "cost_usd": 7.9e-06
+    },
+    {
+      "task_id": "reas-08",
+      "task": "Prove that this cache invalidation strategy never serves stale data.",
+      "expected": "REASONING",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 367.2813330003919,
+      "cost_usd": 8.7e-06
+    },
+    {
+      "task_id": "med-17",
+      "task": "Write a query to count rows in a table grouped by status.",
+      "expected": "MEDIUM",
+      "predicted": "MEDIUM",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 312.49916599972494,
+      "cost_usd": 8e-06
+    },
+    {
+      "task_id": "simp-18",
+      "task": "What does the acronym SQL stand for?",
+      "expected": "SIMPLE",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 298.74862500037125,
+      "cost_usd": 7.500000000000001e-06
+    },
+    {
+      "task_id": "reas-05",
+      "task": "Optimize this query's execution plan to minimize both latency and memory usage, which pull in opposite directions here.",
+      "expected": "REASONING",
+      "predicted": "COMPLEX",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 361.374708000767,
+      "cost_usd": 9.3e-06
+    },
+    {
+      "task_id": "med-08",
+      "task": "Add a null check before this dictionary lookup.",
+      "expected": "MEDIUM",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 304.91191599958256,
+      "cost_usd": 7.600000000000001e-06
+    },
+    {
+      "task_id": "cplx-06",
+      "task": "Move the monolith's background jobs to a separate queue-based service while keeping exactly-once delivery.",
+      "expected": "COMPLEX",
+      "predicted": "COMPLEX",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 475.27837500001624,
+      "cost_usd": 9.200000000000002e-06
+    },
+    {
+      "task_id": "reas-02",
+      "task": "Find the algorithm with the best worst-case time complexity for this problem and justify why.",
+      "expected": "REASONING",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 297.4647499995626,
+      "cost_usd": 9.3e-06
+    },
+    {
+      "task_id": "med-19",
+      "task": "Write a small script to rename all .txt files in a folder to .md.",
+      "expected": "MEDIUM",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 286.13112499988347,
+      "cost_usd": 8.400000000000001e-06
+    },
+    {
+      "task_id": "cplx-12",
+      "task": "Redesign the permission system so it works consistently across the API, the admin UI, and the CLI.",
+      "expected": "COMPLEX",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 430.7617909998953,
+      "cost_usd": 9.600000000000001e-06
+    },
+    {
+      "task_id": "reas-03",
+      "task": "We need this system to be both strongly consistent and available during a network partition -- work out the tradeoff and pick one.",
+      "expected": "REASONING",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 365.5569159991501,
+      "cost_usd": 9.900000000000002e-06
+    },
+    {
+      "task_id": "reas-06",
+      "task": "Determine whether this concurrent algorithm is free of deadlock under all interleavings.",
+      "expected": "REASONING",
+      "predicted": "COMPLEX",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 336.04054099942005,
+      "cost_usd": 8.5e-06
+    },
+    {
+      "task_id": "med-14",
+      "task": "Fix the indentation in this code snippet.",
+      "expected": "MEDIUM",
+      "predicted": "COMPLEX",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 245.64379200000985,
+      "cost_usd": 7.9e-06
+    },
+    {
+      "task_id": "simp-06",
+      "task": "What's the file extension for a Python file?",
+      "expected": "SIMPLE",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 328.0282089999673,
+      "cost_usd": 7.800000000000002e-06
+    },
+    {
+      "task_id": "cplx-14",
+      "task": "Rework the deployment pipeline so staging and production can run different service versions safely.",
+      "expected": "COMPLEX",
+      "predicted": "COMPLEX",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 271.2298330006888,
+      "cost_usd": 8.700000000000001e-06
+    },
+    {
+      "task_id": "cplx-10",
+      "task": "Coordinate the retry logic across the gateway, the queue, and the downstream service so failures aren't double-processed.",
+      "expected": "COMPLEX",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 283.4717499999897,
+      "cost_usd": 9.900000000000002e-06
+    },
+    {
+      "task_id": "reas-07",
+      "task": "We want to minimize cost and maximize availability at the same time for this deployment -- find the best tradeoff point.",
+      "expected": "REASONING",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 360.1952919998439,
+      "cost_usd": 9.699999999999999e-06
+    },
+    {
+      "task_id": "simp-05",
+      "task": "How many bytes are in a kilobyte?",
+      "expected": "SIMPLE",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 303.573499999402,
+      "cost_usd": 7.7e-06
+    },
+    {
+      "task_id": "simp-12",
+      "task": "What's the plural of 'octopus'?",
+      "expected": "SIMPLE",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 329.68891600012284,
+      "cost_usd": 8.5e-06
+    },
+    {
+      "task_id": "simp-03",
+      "task": "What's the default port for HTTPS?",
+      "expected": "SIMPLE",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 354.073917000278,
+      "cost_usd": 7.600000000000001e-06
+    },
+    {
+      "task_id": "cplx-05",
+      "task": "Untangle the circular dependency between the billing and notifications modules.",
+      "expected": "COMPLEX",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 469.44183400046313,
+      "cost_usd": 8.7e-06
+    },
+    {
+      "task_id": "med-11",
+      "task": "Write a function to check if a number is prime.",
+      "expected": "MEDIUM",
+      "predicted": "MEDIUM",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 363.50854200009053,
+      "cost_usd": 7.800000000000002e-06
+    },
+    {
+      "task_id": "med-17",
+      "task": "Write a query to count rows in a table grouped by status.",
+      "expected": "MEDIUM",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 382.22049999967567,
+      "cost_usd": 8.8e-06
+    },
+    {
+      "task_id": "reas-10",
+      "task": "Determine the minimum number of servers needed to guarantee no request is dropped under the worst-case load pattern.",
+      "expected": "REASONING",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 374.4404580002083,
+      "cost_usd": 9.600000000000001e-06
+    },
+    {
+      "task_id": "med-06",
+      "task": "Draft a one-paragraph summary of what this PR changes.",
+      "expected": "MEDIUM",
+      "predicted": "COMPLEX",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 498.33250000028784,
+      "cost_usd": 8.3e-06
+    },
+    {
+      "task_id": "simp-08",
+      "task": "What does CPU stand for?",
+      "expected": "SIMPLE",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 289.74250000010215,
+      "cost_usd": 7.3e-06
+    },
+    {
+      "task_id": "cplx-11",
+      "task": "Split the shared database between two services being separated into independent deployables.",
+      "expected": "COMPLEX",
+      "predicted": "COMPLEX",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 287.87545900013356,
+      "cost_usd": 8.5e-06
+    },
+    {
+      "task_id": "simp-20",
+      "task": "What's the file extension for a compiled Java class?",
+      "expected": "SIMPLE",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 499.80862500069634,
+      "cost_usd": 7.9e-06
+    },
+    {
+      "task_id": "reas-19",
+      "task": "Prove that rolling back this migration is safe even if it's interrupted halfway through.",
+      "expected": "REASONING",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 282.7268330001971,
+      "cost_usd": 9.2e-06
+    },
+    {
+      "task_id": "reas-18",
+      "task": "We want to reduce vendor lock-in but also minimize integration cost -- these pull in opposite directions, find the right balance.",
+      "expected": "REASONING",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 300.6047499993656,
+      "cost_usd": 1e-05
+    },
+    {
+      "task_id": "cplx-01",
+      "task": "Migrate the authentication system from session cookies to JWT without breaking existing logged-in users.",
+      "expected": "COMPLEX",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 391.1288749995947,
+      "cost_usd": 9.3e-06
+    },
+    {
+      "task_id": "reas-16",
+      "task": "Prove that this hashing scheme has no collisions for the given input domain.",
+      "expected": "REASONING",
+      "predicted": "COMPLEX",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 405.48158299952775,
+      "cost_usd": 8.5e-06
+    },
+    {
+      "task_id": "reas-09",
+      "task": "Work out the optimal batch size that minimizes total processing time given both per-item and per-batch overhead.",
+      "expected": "REASONING",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 359.3044170002031,
+      "cost_usd": 9.699999999999999e-06
+    },
+    {
+      "task_id": "reas-17",
+      "task": "Determine whether this scheduling algorithm can starve a given class of tasks indefinitely.",
+      "expected": "REASONING",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 270.8537080006863,
+      "cost_usd": 8.900000000000001e-06
+    },
+    {
+      "task_id": "cplx-13",
+      "task": "Change the event schema in a way that keeps both old and new consumers working during the transition.",
+      "expected": "COMPLEX",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 340.9188749992609,
+      "cost_usd": 9.400000000000001e-06
+    },
+    {
+      "task_id": "med-02",
+      "task": "Draft a short email letting the team know the deploy is delayed by an hour.",
+      "expected": "MEDIUM",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 336.03695800047717,
+      "cost_usd": 8.3e-06
+    },
+    {
+      "task_id": "cplx-08",
+      "task": "Reconcile the two divergent user schemas from the merged codebases into one canonical model.",
+      "expected": "COMPLEX",
+      "predicted": "COMPLEX",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 281.6467079992435,
+      "cost_usd": 8.900000000000001e-06
+    },
+    {
+      "task_id": "simp-17",
+      "task": "What's the SI unit for measuring force?",
+      "expected": "SIMPLE",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 338.7104999992516,
+      "cost_usd": 7.7e-06
+    },
+    {
+      "task_id": "med-19",
+      "task": "Write a small script to rename all .txt files in a folder to .md.",
+      "expected": "MEDIUM",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 459.42612500039104,
+      "cost_usd": 8.400000000000001e-06
+    },
+    {
+      "task_id": "simp-11",
+      "task": "What's the ASCII code for the letter 'A'?",
+      "expected": "SIMPLE",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 307.92174999987765,
+      "cost_usd": 8e-06
+    },
+    {
+      "task_id": "cplx-03",
+      "task": "Redesign the database schema to support multi-tenancy without a full data migration downtime.",
+      "expected": "COMPLEX",
+      "predicted": "COMPLEX",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 370.02758300059213,
+      "cost_usd": 8.900000000000001e-06
+    },
+    {
+      "task_id": "reas-08",
+      "task": "Prove that this cache invalidation strategy never serves stale data.",
+      "expected": "REASONING",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 306.9593749996784,
+      "cost_usd": 8.7e-06
+    },
+    {
+      "task_id": "simp-10",
+      "task": "What command lists files in a directory on Linux?",
+      "expected": "SIMPLE",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 305.8048749999216,
+      "cost_usd": 7.7e-06
+    },
+    {
+      "task_id": "reas-02",
+      "task": "Find the algorithm with the best worst-case time complexity for this problem and justify why.",
+      "expected": "REASONING",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 373.68762500045705,
+      "cost_usd": 9.3e-06
+    },
+    {
+      "task_id": "med-04",
+      "task": "Add a docstring to this function.",
+      "expected": "MEDIUM",
+      "predicted": "COMPLEX",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 383.9935420000984,
+      "cost_usd": 7.9e-06
+    },
+    {
+      "task_id": "cplx-17",
+      "task": "Redesign the rate limiter so it works correctly across multiple regions with independent clocks.",
+      "expected": "COMPLEX",
+      "predicted": "COMPLEX",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 379.81241600027715,
+      "cost_usd": 8.700000000000001e-06
+    },
+    {
+      "task_id": "simp-06",
+      "task": "What's the file extension for a Python file?",
+      "expected": "SIMPLE",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 274.2689579999933,
+      "cost_usd": 7.800000000000002e-06
+    },
+    {
+      "task_id": "reas-15",
+      "task": "Balance the conflicting goals of minimizing bundle size and maximizing runtime performance for this build.",
+      "expected": "REASONING",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 338.2516659994508,
+      "cost_usd": 9.100000000000001e-06
+    },
+    {
+      "task_id": "reas-11",
+      "task": "Prove that two given regular expressions match the same language.",
+      "expected": "REASONING",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 305.68979200052127,
+      "cost_usd": 8.6e-06
+    },
+    {
+      "task_id": "cplx-06",
+      "task": "Move the monolith's background jobs to a separate queue-based service while keeping exactly-once delivery.",
+      "expected": "COMPLEX",
+      "predicted": "COMPLEX",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 258.7073340000643,
+      "cost_usd": 9.200000000000002e-06
+    },
+    {
+      "task_id": "simp-19",
+      "task": "What's the maximum value of a signed 32-bit integer?",
+      "expected": "SIMPLE",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 374.5317500006422,
+      "cost_usd": 8.3e-06
+    },
+    {
+      "task_id": "med-10",
+      "task": "Draft a commit message for this small bug fix.",
+      "expected": "MEDIUM",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 356.29058300037286,
+      "cost_usd": 7.7e-06
+    },
+    {
+      "task_id": "cplx-19",
+      "task": "Restructure the test suite so integration tests don't depend on execution order across modules.",
+      "expected": "COMPLEX",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 325.0783749999755,
+      "cost_usd": 9.3e-06
+    },
+    {
+      "task_id": "med-20",
+      "task": "Draft a one-line docstring for this class.",
+      "expected": "MEDIUM",
+      "predicted": "MEDIUM",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 300.9051660001205,
+      "cost_usd": 7.800000000000002e-06
+    },
+    {
+      "task_id": "med-03",
+      "task": "Write a regex that matches a US phone number.",
+      "expected": "MEDIUM",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 339.59758399942075,
+      "cost_usd": 8.5e-06
+    },
+    {
+      "task_id": "reas-12",
+      "task": "We need low latency for reads and strong durability for writes, but the two requirements pull the storage engine choice in opposite directions -- resolve it.",
+      "expected": "REASONING",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 343.6599169999681,
+      "cost_usd": 1.0300000000000001e-05
+    },
+    {
+      "task_id": "med-16",
+      "task": "Draft a Slack message announcing a scheduled maintenance window.",
+      "expected": "MEDIUM",
+      "predicted": "MEDIUM",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 406.69987499950366,
+      "cost_usd": 7.7e-06
+    },
+    {
+      "task_id": "med-12",
+      "task": "Add type hints to this function's signature.",
+      "expected": "MEDIUM",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 1962.0790419994592,
+      "cost_usd": 7.7e-06
+    },
+    {
+      "task_id": "med-09",
+      "task": "Write a bash one-liner to count lines in a file.",
+      "expected": "MEDIUM",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 328.7742499996966,
+      "cost_usd": 8e-06
+    },
+    {
+      "task_id": "cplx-20",
+      "task": "Change the ID generation strategy from auto-increment to UUID across a system with existing external references.",
+      "expected": "COMPLEX",
+      "predicted": "COMPLEX",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 370.20716600000014,
+      "cost_usd": 9.000000000000002e-06
+    },
+    {
+      "task_id": "med-14",
+      "task": "Fix the indentation in this code snippet.",
+      "expected": "MEDIUM",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 263.2400409993352,
+      "cost_usd": 8.3e-06
+    },
+    {
+      "task_id": "cplx-14",
+      "task": "Rework the deployment pipeline so staging and production can run different service versions safely.",
+      "expected": "COMPLEX",
+      "predicted": "MEDIUM",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 385.97575000039797,
+      "cost_usd": 8.3e-06
+    },
+    {
+      "task_id": "med-08",
+      "task": "Add a null check before this dictionary lookup.",
+      "expected": "MEDIUM",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 274.60154199980025,
+      "cost_usd": 8.400000000000001e-06
+    },
+    {
+      "task_id": "simp-14",
+      "task": "What does JSON stand for?",
+      "expected": "SIMPLE",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 473.90912499940896,
+      "cost_usd": 7.3e-06
+    },
+    {
+      "task_id": "cplx-04",
+      "task": "Coordinate a rollout of a new caching layer across three services that share the same cache keys.",
+      "expected": "COMPLEX",
+      "predicted": "COMPLEX",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 278.2369579999795,
+      "cost_usd": 8.900000000000001e-06
+    },
+    {
+      "task_id": "med-05",
+      "task": "Write a unit test for this addition function.",
+      "expected": "MEDIUM",
+      "predicted": "COMPLEX",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 294.67879100047867,
+      "cost_usd": 8e-06
+    },
+    {
+      "task_id": "reas-05",
+      "task": "Optimize this query's execution plan to minimize both latency and memory usage, which pull in opposite directions here.",
+      "expected": "REASONING",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 478.61795800054097,
+      "cost_usd": 9.699999999999999e-06
+    },
+    {
+      "task_id": "med-15",
+      "task": "Write a function that converts Celsius to Fahrenheit.",
+      "expected": "MEDIUM",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 357.08066600000166,
+      "cost_usd": 7.600000000000001e-06
+    },
+    {
+      "task_id": "cplx-02",
+      "task": "Refactor the payment service to support multiple currencies across all downstream consumers.",
+      "expected": "COMPLEX",
+      "predicted": "COMPLEX",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 332.63424999950075,
+      "cost_usd": 8.5e-06
+    },
+    {
+      "task_id": "cplx-15",
+      "task": "Resolve the inconsistency between the cache's TTL and the database's eventual consistency window.",
+      "expected": "COMPLEX",
+      "predicted": "COMPLEX",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 329.4587500004127,
+      "cost_usd": 8.900000000000001e-06
+    },
+    {
+      "task_id": "reas-06",
+      "task": "Determine whether this concurrent algorithm is free of deadlock under all interleavings.",
+      "expected": "REASONING",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 314.3862500000978,
+      "cost_usd": 8.900000000000001e-06
+    },
+    {
+      "task_id": "simp-02",
+      "task": "What does the acronym API stand for?",
+      "expected": "SIMPLE",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 366.56320900056016,
+      "cost_usd": 7.500000000000001e-06
+    },
+    {
+      "task_id": "med-01",
+      "task": "Write a function that reverses a string.",
+      "expected": "MEDIUM",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 303.9267909998671,
+      "cost_usd": 7.500000000000001e-06
+    },
+    {
+      "task_id": "simp-07",
+      "task": "What's the boiling point of water in Celsius?",
+      "expected": "SIMPLE",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 268.8236659996619,
+      "cost_usd": 7.800000000000002e-06
+    },
+    {
+      "task_id": "med-18",
+      "task": "Add a try/except around this file read.",
+      "expected": "MEDIUM",
+      "predicted": "MEDIUM",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 319.5183750003707,
+      "cost_usd": 7.7e-06
+    },
+    {
+      "task_id": "simp-15",
+      "task": "What's the keyboard shortcut to copy text on Windows?",
+      "expected": "SIMPLE",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 428.873208999903,
+      "cost_usd": 7.9e-06
+    },
+    {
+      "task_id": "cplx-12",
+      "task": "Redesign the permission system so it works consistently across the API, the admin UI, and the CLI.",
+      "expected": "COMPLEX",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 296.3452909998523,
+      "cost_usd": 9.600000000000001e-06
+    },
+    {
+      "task_id": "cplx-07",
+      "task": "Update the API versioning scheme in a way that doesn't break any of the five existing client SDKs.",
+      "expected": "COMPLEX",
+      "predicted": "COMPLEX",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 357.20962499999587,
+      "cost_usd": 9.4e-06
+    },
+    {
+      "task_id": "reas-20",
+      "task": "Optimize this algorithm's memory usage without increasing its time complexity.",
+      "expected": "REASONING",
+      "predicted": "COMPLEX",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 349.68320799998764,
+      "cost_usd": 8.400000000000001e-06
+    },
+    {
+      "task_id": "reas-14",
+      "task": "Find the theoretical lower bound on the number of comparisons needed to sort this input.",
+      "expected": "REASONING",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 765.4062499996144,
+      "cost_usd": 9.100000000000001e-06
+    },
+    {
+      "task_id": "simp-01",
+      "task": "What's the HTTP status code for 'not found'?",
+      "expected": "SIMPLE",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 394.83212499999354,
+      "cost_usd": 8e-06
+    },
+    {
+      "task_id": "cplx-16",
+      "task": "Consolidate three overlapping logging systems into one without losing any existing alerting.",
+      "expected": "COMPLEX",
+      "predicted": "COMPLEX",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 360.84441599996353,
+      "cost_usd": 8.6e-06
+    },
+    {
+      "task_id": "cplx-10",
+      "task": "Coordinate the retry logic across the gateway, the queue, and the downstream service so failures aren't double-processed.",
+      "expected": "COMPLEX",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 303.9167079996332,
+      "cost_usd": 9.900000000000002e-06
+    },
+    {
+      "task_id": "simp-04",
+      "task": "What's the capital of France?",
+      "expected": "SIMPLE",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 335.02845899965905,
+      "cost_usd": 7.500000000000001e-06
+    },
+    {
+      "task_id": "reas-03",
+      "task": "We need this system to be both strongly consistent and available during a network partition -- work out the tradeoff and pick one.",
+      "expected": "REASONING",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 367.14795799980493,
+      "cost_usd": 9.900000000000002e-06
+    },
+    {
+      "task_id": "simp-13",
+      "task": "What's the time zone abbreviation for Pacific Standard Time?",
+      "expected": "SIMPLE",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 428.8895419995242,
+      "cost_usd": 7.9e-06
+    },
+    {
+      "task_id": "med-07",
+      "task": "Write a SQL query to select all users created in the last 7 days.",
+      "expected": "MEDIUM",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 284.07583399985015,
+      "cost_usd": 9.100000000000001e-06
+    },
+    {
+      "task_id": "cplx-09",
+      "task": "Design a backward-compatible way to change the primary key type on a table with foreign keys in six other tables.",
+      "expected": "COMPLEX",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 302.006750000146,
+      "cost_usd": 9.800000000000001e-06
+    },
+    {
+      "task_id": "reas-01",
+      "task": "Prove that this recursive function always terminates.",
+      "expected": "REASONING",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 425.3303749992483,
+      "cost_usd": 8.3e-06
+    },
+    {
+      "task_id": "cplx-18",
+      "task": "Migrate the search index to a new provider while keeping search results consistent during the cutover.",
+      "expected": "COMPLEX",
+      "predicted": "COMPLEX",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 357.7132500004154,
+      "cost_usd": 9.000000000000002e-06
+    },
+    {
+      "task_id": "reas-04",
+      "task": "Prove that this sorting algorithm is stable.",
+      "expected": "REASONING",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 296.056750000389,
+      "cost_usd": 8.3e-06
+    },
+    {
+      "task_id": "simp-16",
+      "task": "What's the default branch name convention in modern git repos?",
+      "expected": "SIMPLE",
+      "predicted": "MEDIUM",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 419.3501670006299,
+      "cost_usd": 8e-06
+    },
+    {
+      "task_id": "med-13",
+      "task": "Write a short changelog entry for this release.",
+      "expected": "MEDIUM",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 285.68654199989396,
+      "cost_usd": 7.7e-06
+    },
+    {
+      "task_id": "simp-09",
+      "task": "What's the syntax for a Python list comprehension?",
+      "expected": "SIMPLE",
+      "predicted": "MEDIUM",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 331.14470800046547,
+      "cost_usd": 7.800000000000002e-06
+    },
+    {
+      "task_id": "reas-13",
+      "task": "Show that this distributed lock implementation can't have two holders at once.",
+      "expected": "REASONING",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 396.52370899966627,
+      "cost_usd": 9e-06
+    },
+    {
+      "task_id": "simp-18",
+      "task": "What does the acronym SQL stand for?",
+      "expected": "SIMPLE",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 312.9186670003037,
+      "cost_usd": 7.500000000000001e-06
+    },
+    {
+      "task_id": "simp-01",
+      "task": "What's the HTTP status code for 'not found'?",
+      "expected": "SIMPLE",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 341.64558299926284,
+      "cost_usd": 8e-06
+    },
+    {
+      "task_id": "simp-04",
+      "task": "What's the capital of France?",
+      "expected": "SIMPLE",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 386.3003339993156,
+      "cost_usd": 7.500000000000001e-06
+    },
+    {
+      "task_id": "reas-12",
+      "task": "We need low latency for reads and strong durability for writes, but the two requirements pull the storage engine choice in opposite directions -- resolve it.",
+      "expected": "REASONING",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 313.68299999940064,
+      "cost_usd": 1.0300000000000001e-05
+    },
+    {
+      "task_id": "simp-07",
+      "task": "What's the boiling point of water in Celsius?",
+      "expected": "SIMPLE",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 362.70579200026987,
+      "cost_usd": 7.800000000000002e-06
+    },
+    {
+      "task_id": "reas-02",
+      "task": "Find the algorithm with the best worst-case time complexity for this problem and justify why.",
+      "expected": "REASONING",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 352.4937089996456,
+      "cost_usd": 9.3e-06
+    },
+    {
+      "task_id": "reas-07",
+      "task": "We want to minimize cost and maximize availability at the same time for this deployment -- find the best tradeoff point.",
+      "expected": "REASONING",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 252.3689170002399,
+      "cost_usd": 9.699999999999999e-06
+    },
+    {
+      "task_id": "simp-18",
+      "task": "What does the acronym SQL stand for?",
+      "expected": "SIMPLE",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 275.8847909999531,
+      "cost_usd": 7.500000000000001e-06
+    },
+    {
+      "task_id": "med-11",
+      "task": "Write a function to check if a number is prime.",
+      "expected": "MEDIUM",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 313.18854199980706,
+      "cost_usd": 8.6e-06
+    },
+    {
+      "task_id": "med-19",
+      "task": "Write a small script to rename all .txt files in a folder to .md.",
+      "expected": "MEDIUM",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 282.9151659998388,
+      "cost_usd": 8.400000000000001e-06
+    },
+    {
+      "task_id": "simp-19",
+      "task": "What's the maximum value of a signed 32-bit integer?",
+      "expected": "SIMPLE",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 330.69316699948104,
+      "cost_usd": 8.3e-06
+    },
+    {
+      "task_id": "simp-10",
+      "task": "What command lists files in a directory on Linux?",
+      "expected": "SIMPLE",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 359.2101249996631,
+      "cost_usd": 7.7e-06
+    },
+    {
+      "task_id": "med-17",
+      "task": "Write a query to count rows in a table grouped by status.",
+      "expected": "MEDIUM",
+      "predicted": "MEDIUM",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 258.2917500003532,
+      "cost_usd": 8e-06
+    },
+    {
+      "task_id": "simp-14",
+      "task": "What does JSON stand for?",
+      "expected": "SIMPLE",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 369.8716669996429,
+      "cost_usd": 7.3e-06
+    },
+    {
+      "task_id": "med-06",
+      "task": "Draft a one-paragraph summary of what this PR changes.",
+      "expected": "MEDIUM",
+      "predicted": "MEDIUM",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 378.0954579997342,
+      "cost_usd": 7.9e-06
+    },
+    {
+      "task_id": "cplx-13",
+      "task": "Change the event schema in a way that keeps both old and new consumers working during the transition.",
+      "expected": "COMPLEX",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 379.6454170005745,
+      "cost_usd": 9.400000000000001e-06
+    },
+    {
+      "task_id": "med-18",
+      "task": "Add a try/except around this file read.",
+      "expected": "MEDIUM",
+      "predicted": "COMPLEX",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 363.5028329999841,
+      "cost_usd": 8.100000000000002e-06
+    },
+    {
+      "task_id": "reas-16",
+      "task": "Prove that this hashing scheme has no collisions for the given input domain.",
+      "expected": "REASONING",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 370.4453749996901,
+      "cost_usd": 8.900000000000001e-06
+    },
+    {
+      "task_id": "simp-20",
+      "task": "What's the file extension for a compiled Java class?",
+      "expected": "SIMPLE",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 329.4210829999429,
+      "cost_usd": 7.9e-06
+    },
+    {
+      "task_id": "cplx-04",
+      "task": "Coordinate a rollout of a new caching layer across three services that share the same cache keys.",
+      "expected": "COMPLEX",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 380.096875000163,
+      "cost_usd": 9.3e-06
+    },
+    {
+      "task_id": "cplx-10",
+      "task": "Coordinate the retry logic across the gateway, the queue, and the downstream service so failures aren't double-processed.",
+      "expected": "COMPLEX",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 355.5523750001157,
+      "cost_usd": 9.900000000000002e-06
+    },
+    {
+      "task_id": "reas-20",
+      "task": "Optimize this algorithm's memory usage without increasing its time complexity.",
+      "expected": "REASONING",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 311.7923329991754,
+      "cost_usd": 8.8e-06
+    },
+    {
+      "task_id": "simp-17",
+      "task": "What's the SI unit for measuring force?",
+      "expected": "SIMPLE",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 382.3912500001825,
+      "cost_usd": 7.7e-06
+    },
+    {
+      "task_id": "cplx-06",
+      "task": "Move the monolith's background jobs to a separate queue-based service while keeping exactly-once delivery.",
+      "expected": "COMPLEX",
+      "predicted": "COMPLEX",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 396.8628339998759,
+      "cost_usd": 9.200000000000002e-06
+    },
+    {
+      "task_id": "reas-03",
+      "task": "We need this system to be both strongly consistent and available during a network partition -- work out the tradeoff and pick one.",
+      "expected": "REASONING",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 656.3024999995832,
+      "cost_usd": 9.900000000000002e-06
+    },
+    {
+      "task_id": "med-12",
+      "task": "Add type hints to this function's signature.",
+      "expected": "MEDIUM",
+      "predicted": "COMPLEX",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 299.59545899964724,
+      "cost_usd": 8.100000000000002e-06
+    },
+    {
+      "task_id": "reas-15",
+      "task": "Balance the conflicting goals of minimizing bundle size and maximizing runtime performance for this build.",
+      "expected": "REASONING",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 284.90675000011834,
+      "cost_usd": 9.100000000000001e-06
+    },
+    {
+      "task_id": "simp-13",
+      "task": "What's the time zone abbreviation for Pacific Standard Time?",
+      "expected": "SIMPLE",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 295.0265830004355,
+      "cost_usd": 7.9e-06
+    },
+    {
+      "task_id": "reas-01",
+      "task": "Prove that this recursive function always terminates.",
+      "expected": "REASONING",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 364.77800000011484,
+      "cost_usd": 8.3e-06
+    },
+    {
+      "task_id": "simp-06",
+      "task": "What's the file extension for a Python file?",
+      "expected": "SIMPLE",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 363.89062499983993,
+      "cost_usd": 7.800000000000002e-06
+    },
+    {
+      "task_id": "cplx-09",
+      "task": "Design a backward-compatible way to change the primary key type on a table with foreign keys in six other tables.",
+      "expected": "COMPLEX",
+      "predicted": "COMPLEX",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 297.2670829994968,
+      "cost_usd": 9.4e-06
+    },
+    {
+      "task_id": "cplx-15",
+      "task": "Resolve the inconsistency between the cache's TTL and the database's eventual consistency window.",
+      "expected": "COMPLEX",
+      "predicted": "COMPLEX",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 349.8979160003728,
+      "cost_usd": 8.900000000000001e-06
+    },
+    {
+      "task_id": "reas-04",
+      "task": "Prove that this sorting algorithm is stable.",
+      "expected": "REASONING",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 416.8075409997982,
+      "cost_usd": 8.3e-06
+    },
+    {
+      "task_id": "med-03",
+      "task": "Write a regex that matches a US phone number.",
+      "expected": "MEDIUM",
+      "predicted": "COMPLEX",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 274.36000000034255,
+      "cost_usd": 8.100000000000002e-06
+    },
+    {
+      "task_id": "cplx-01",
+      "task": "Migrate the authentication system from session cookies to JWT without breaking existing logged-in users.",
+      "expected": "COMPLEX",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 323.21520799996506,
+      "cost_usd": 9.3e-06
+    },
+    {
+      "task_id": "cplx-14",
+      "task": "Rework the deployment pipeline so staging and production can run different service versions safely.",
+      "expected": "COMPLEX",
+      "predicted": "COMPLEX",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 289.0788340000654,
+      "cost_usd": 8.700000000000001e-06
+    },
+    {
+      "task_id": "med-07",
+      "task": "Write a SQL query to select all users created in the last 7 days.",
+      "expected": "MEDIUM",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 378.01862499964045,
+      "cost_usd": 9.100000000000001e-06
+    },
+    {
+      "task_id": "med-09",
+      "task": "Write a bash one-liner to count lines in a file.",
+      "expected": "MEDIUM",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 401.3195839997934,
+      "cost_usd": 8e-06
+    },
+    {
+      "task_id": "cplx-05",
+      "task": "Untangle the circular dependency between the billing and notifications modules.",
+      "expected": "COMPLEX",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 453.62629200008087,
+      "cost_usd": 8.7e-06
+    },
+    {
+      "task_id": "cplx-12",
+      "task": "Redesign the permission system so it works consistently across the API, the admin UI, and the CLI.",
+      "expected": "COMPLEX",
+      "predicted": "COMPLEX",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 326.43212500079244,
+      "cost_usd": 9.200000000000002e-06
+    },
+    {
+      "task_id": "cplx-02",
+      "task": "Refactor the payment service to support multiple currencies across all downstream consumers.",
+      "expected": "COMPLEX",
+      "predicted": "COMPLEX",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 294.4781249998414,
+      "cost_usd": 8.5e-06
+    },
+    {
+      "task_id": "cplx-19",
+      "task": "Restructure the test suite so integration tests don't depend on execution order across modules.",
+      "expected": "COMPLEX",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 418.5509999997521,
+      "cost_usd": 9.3e-06
+    },
+    {
+      "task_id": "cplx-03",
+      "task": "Redesign the database schema to support multi-tenancy without a full data migration downtime.",
+      "expected": "COMPLEX",
+      "predicted": "COMPLEX",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 328.04462500007503,
+      "cost_usd": 8.900000000000001e-06
+    },
+    {
+      "task_id": "reas-14",
+      "task": "Find the theoretical lower bound on the number of comparisons needed to sort this input.",
+      "expected": "REASONING",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 318.5847909999211,
+      "cost_usd": 9.100000000000001e-06
+    },
+    {
+      "task_id": "simp-09",
+      "task": "What's the syntax for a Python list comprehension?",
+      "expected": "SIMPLE",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 385.2378330002466,
+      "cost_usd": 7.800000000000002e-06
+    },
+    {
+      "task_id": "reas-17",
+      "task": "Determine whether this scheduling algorithm can starve a given class of tasks indefinitely.",
+      "expected": "REASONING",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 326.06420800038904,
+      "cost_usd": 8.900000000000001e-06
+    },
+    {
+      "task_id": "reas-08",
+      "task": "Prove that this cache invalidation strategy never serves stale data.",
+      "expected": "REASONING",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 339.78495900009875,
+      "cost_usd": 8.7e-06
+    },
+    {
+      "task_id": "reas-09",
+      "task": "Work out the optimal batch size that minimizes total processing time given both per-item and per-batch overhead.",
+      "expected": "REASONING",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 340.3262080000786,
+      "cost_usd": 9.699999999999999e-06
+    },
+    {
+      "task_id": "cplx-20",
+      "task": "Change the ID generation strategy from auto-increment to UUID across a system with existing external references.",
+      "expected": "COMPLEX",
+      "predicted": "COMPLEX",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 317.13608399968507,
+      "cost_usd": 9.000000000000002e-06
+    },
+    {
+      "task_id": "simp-15",
+      "task": "What's the keyboard shortcut to copy text on Windows?",
+      "expected": "SIMPLE",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 529.479333999916,
+      "cost_usd": 7.9e-06
+    },
+    {
+      "task_id": "simp-16",
+      "task": "What's the default branch name convention in modern git repos?",
+      "expected": "SIMPLE",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 479.1922920003344,
+      "cost_usd": 8.8e-06
+    },
+    {
+      "task_id": "reas-19",
+      "task": "Prove that rolling back this migration is safe even if it's interrupted halfway through.",
+      "expected": "REASONING",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 364.244417000009,
+      "cost_usd": 9.2e-06
+    },
+    {
+      "task_id": "med-16",
+      "task": "Draft a Slack message announcing a scheduled maintenance window.",
+      "expected": "MEDIUM",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 320.61595899995154,
+      "cost_usd": 7.7e-06
+    },
+    {
+      "task_id": "reas-18",
+      "task": "We want to reduce vendor lock-in but also minimize integration cost -- these pull in opposite directions, find the right balance.",
+      "expected": "REASONING",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 359.28654199960874,
+      "cost_usd": 1e-05
+    },
+    {
+      "task_id": "med-14",
+      "task": "Fix the indentation in this code snippet.",
+      "expected": "MEDIUM",
+      "predicted": "MEDIUM",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 428.00262499986275,
+      "cost_usd": 7.500000000000001e-06
+    },
+    {
+      "task_id": "reas-13",
+      "task": "Show that this distributed lock implementation can't have two holders at once.",
+      "expected": "REASONING",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 310.46595799944043,
+      "cost_usd": 9e-06
+    },
+    {
+      "task_id": "med-05",
+      "task": "Write a unit test for this addition function.",
+      "expected": "MEDIUM",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 366.4560839997648,
+      "cost_usd": 8.400000000000001e-06
+    },
+    {
+      "task_id": "reas-11",
+      "task": "Prove that two given regular expressions match the same language.",
+      "expected": "REASONING",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 351.1988330001259,
+      "cost_usd": 8.6e-06
+    },
+    {
+      "task_id": "med-10",
+      "task": "Draft a commit message for this small bug fix.",
+      "expected": "MEDIUM",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 313.4735419998833,
+      "cost_usd": 7.7e-06
+    },
+    {
+      "task_id": "med-04",
+      "task": "Add a docstring to this function.",
+      "expected": "MEDIUM",
+      "predicted": "COMPLEX",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 400.50520800014056,
+      "cost_usd": 7.9e-06
+    },
+    {
+      "task_id": "simp-02",
+      "task": "What does the acronym API stand for?",
+      "expected": "SIMPLE",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 340.56766699995933,
+      "cost_usd": 7.500000000000001e-06
+    },
+    {
+      "task_id": "reas-10",
+      "task": "Determine the minimum number of servers needed to guarantee no request is dropped under the worst-case load pattern.",
+      "expected": "REASONING",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 293.3194170000206,
+      "cost_usd": 9.600000000000001e-06
+    },
+    {
+      "task_id": "simp-03",
+      "task": "What's the default port for HTTPS?",
+      "expected": "SIMPLE",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 435.1505829999951,
+      "cost_usd": 7.600000000000001e-06
+    },
+    {
+      "task_id": "cplx-18",
+      "task": "Migrate the search index to a new provider while keeping search results consistent during the cutover.",
+      "expected": "COMPLEX",
+      "predicted": "COMPLEX",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 359.3641249999564,
+      "cost_usd": 9.000000000000002e-06
+    },
+    {
+      "task_id": "med-15",
+      "task": "Write a function that converts Celsius to Fahrenheit.",
+      "expected": "MEDIUM",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 302.7180420003788,
+      "cost_usd": 7.600000000000001e-06
+    },
+    {
+      "task_id": "reas-05",
+      "task": "Optimize this query's execution plan to minimize both latency and memory usage, which pull in opposite directions here.",
+      "expected": "REASONING",
+      "predicted": "COMPLEX",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 307.3956670004918,
+      "cost_usd": 9.3e-06
+    },
+    {
+      "task_id": "cplx-17",
+      "task": "Redesign the rate limiter so it works correctly across multiple regions with independent clocks.",
+      "expected": "COMPLEX",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 454.2137089993048,
+      "cost_usd": 9.100000000000001e-06
+    },
+    {
+      "task_id": "cplx-08",
+      "task": "Reconcile the two divergent user schemas from the merged codebases into one canonical model.",
+      "expected": "COMPLEX",
+      "predicted": "COMPLEX",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 388.2791250007358,
+      "cost_usd": 8.900000000000001e-06
+    },
+    {
+      "task_id": "reas-06",
+      "task": "Determine whether this concurrent algorithm is free of deadlock under all interleavings.",
+      "expected": "REASONING",
+      "predicted": "COMPLEX",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 318.81841700032965,
+      "cost_usd": 8.5e-06
+    },
+    {
+      "task_id": "cplx-11",
+      "task": "Split the shared database between two services being separated into independent deployables.",
+      "expected": "COMPLEX",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 297.5648749998072,
+      "cost_usd": 8.900000000000001e-06
+    },
+    {
+      "task_id": "cplx-16",
+      "task": "Consolidate three overlapping logging systems into one without losing any existing alerting.",
+      "expected": "COMPLEX",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 343.10487499988085,
+      "cost_usd": 9e-06
+    },
+    {
+      "task_id": "med-01",
+      "task": "Write a function that reverses a string.",
+      "expected": "MEDIUM",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 432.1561249998922,
+      "cost_usd": 7.500000000000001e-06
+    },
+    {
+      "task_id": "simp-05",
+      "task": "How many bytes are in a kilobyte?",
+      "expected": "SIMPLE",
+      "predicted": "MEDIUM",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 330.7950839998739,
+      "cost_usd": 7.7e-06
+    },
+    {
+      "task_id": "med-08",
+      "task": "Add a null check before this dictionary lookup.",
+      "expected": "MEDIUM",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 351.452667000558,
+      "cost_usd": 8.400000000000001e-06
+    },
+    {
+      "task_id": "med-13",
+      "task": "Write a short changelog entry for this release.",
+      "expected": "MEDIUM",
+      "predicted": "COMPLEX",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 309.69562500013126,
+      "cost_usd": 8.100000000000002e-06
+    },
+    {
+      "task_id": "med-20",
+      "task": "Draft a one-line docstring for this class.",
+      "expected": "MEDIUM",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 409.02695800014044,
+      "cost_usd": 8.6e-06
+    },
+    {
+      "task_id": "med-02",
+      "task": "Draft a short email letting the team know the deploy is delayed by an hour.",
+      "expected": "MEDIUM",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 484.1077920000316,
+      "cost_usd": 8.3e-06
+    },
+    {
+      "task_id": "cplx-07",
+      "task": "Update the API versioning scheme in a way that doesn't break any of the five existing client SDKs.",
+      "expected": "COMPLEX",
+      "predicted": "COMPLEX",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 280.00704199985194,
+      "cost_usd": 9.4e-06
+    },
+    {
+      "task_id": "simp-11",
+      "task": "What's the ASCII code for the letter 'A'?",
+      "expected": "SIMPLE",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 361.80712500026857,
+      "cost_usd": 8e-06
+    },
+    {
+      "task_id": "simp-12",
+      "task": "What's the plural of 'octopus'?",
+      "expected": "SIMPLE",
+      "predicted": "REASONING",
+      "abstained": false,
+      "correct": false,
+      "latency_ms": 462.13716700003715,
+      "cost_usd": 8.5e-06
+    },
+    {
+      "task_id": "simp-08",
+      "task": "What does CPU stand for?",
+      "expected": "SIMPLE",
+      "predicted": "SIMPLE",
+      "abstained": false,
+      "correct": true,
+      "latency_ms": 370.6363749997763,
+      "cost_usd": 7.3e-06
+    }
+  ]
+}
