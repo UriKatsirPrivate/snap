@@ -26,7 +26,7 @@ def decide_focus(
 
     # Filter the focus's tool bundle against tools the host currently knows
     # to exist, so a stale or renamed tool never gets dispatched.
-    available = {t.name for t in request.available_tools} if request.available_tools else None
+    available = {t.name for t in request.available_tools} if request.available_tools is not None else None
     bundle = TOOL_BUNDLES[focus]
     tools = [t for t in bundle if available is None or t in available]
 

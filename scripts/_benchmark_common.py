@@ -66,7 +66,7 @@ def run(backend: Backend, cases: list[Case], repeats: int, seed: int) -> list[Tr
 def summarize(trials: list[Trial], num_cases: int, labels: list[str]) -> dict:
     n = len(trials)
     correct = sum(t.correct for t in trials)
-    latencies = [t.latency_ms for t in trials]
+    latencies = [t.latency_ms for t in trials if t.latency_ms is not None]
     costs = [t.cost_usd for t in trials if t.cost_usd is not None]
 
     per_label = {}
@@ -80,6 +80,15 @@ def summarize(trials: list[Trial], num_cases: int, labels: list[str]) -> dict:
         confusion[expected] = {p: sum(1 for t in row if t.predicted == p and not t.abstained) for p in labels}
         confusion[expected]["abstain"] = sum(1 for t in row if t.abstained)
 
+    latency_stats = None
+    if latencies:
+        latency_stats = {
+            "median": statistics.median(latencies),
+            "p95": statistics.quantiles(latencies, n=20)[18] if len(latencies) >= 2 else latencies[0],
+            "min": min(latencies),
+            "max": max(latencies),
+        }
+
     return {
         "cases": num_cases,
         "repeats": n // num_cases,
@@ -89,12 +98,7 @@ def summarize(trials: list[Trial], num_cases: int, labels: list[str]) -> dict:
         "abstained": sum(t.abstained for t in trials),
         "per_label": per_label,
         "confusion_matrix": confusion,
-        "latency_ms": {
-            "median": statistics.median(latencies),
-            "p95": statistics.quantiles(latencies, n=20)[18],
-            "min": min(latencies),
-            "max": max(latencies),
-        },
+        "latency_ms": latency_stats,
         "cost_usd": {"total": sum(costs), "priced_calls": len(costs)} if costs else None,
     }
 

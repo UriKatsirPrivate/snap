@@ -42,7 +42,7 @@ class ToolDef(BaseModel):
 class FocusDecisionRequest(BaseModel):
     task_id: str
     session_id: str
-    available_tools: list[ToolDef] = Field(default_factory=list)
+    available_tools: list[ToolDef] | None = None
     context: dict[str, Any] = Field(default_factory=dict)
 
 

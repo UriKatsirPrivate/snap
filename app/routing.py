@@ -17,6 +17,17 @@ def decide_route(
     # A pinned route bypasses the selector entirely: user intent wins.
     if request.pinned_route_id is not None:
         chosen = by_id.get(request.pinned_route_id)
+        if chosen is not None:
+            decision = "pinned"
+            fallback_used = False
+        else:
+            # An unresolvable pin must not be reported as a successful pin --
+            # fall back the same way an invalid selector choice would.
+            fallback = by_id.get(request.fallback_route_id) if request.fallback_route_id else None
+            chosen = fallback
+            fallback_used = fallback is not None
+            decision = "fallback" if fallback_used else "abstained"
+
         record = DecisionRecord(
             kind="route",
             task_id=request.task_id,
@@ -24,15 +35,15 @@ def decide_route(
             selector_choice=None,
             abstained=False,
             validated=chosen is not None,
-            fallback_used=False,
+            fallback_used=fallback_used,
             final_choice=chosen.id if chosen else None,
         )
         return (
             RouteDecisionResponse(
                 task_id=request.task_id,
-                decision="pinned",
+                decision=decision,
                 chosen=chosen,
-                fallback_used=False,
+                fallback_used=fallback_used,
                 record_id=record.id,
             ),
             record,

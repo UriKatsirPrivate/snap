@@ -101,7 +101,7 @@ class CloudSqlRecorder(DecisionRecorder):
             # nullable regardless of the declared DDL -- retroactively adding
             # NOT NULL would fail against any existing rows.
             for name, ddl in self._SCHEMA:
-                base_type = ddl.split()[0]
+                base_type = ddl.replace("PRIMARY KEY", "").replace("NOT NULL", "").strip()
                 cur.execute(f"ALTER TABLE {self._TABLE} ADD COLUMN IF NOT EXISTS {name} {base_type}")
             conn.commit()
         finally:
