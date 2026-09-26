@@ -14,6 +14,9 @@ class DecisionRecorder(ABC):
     @abstractmethod
     def recent(self, limit: int) -> list[DecisionRecord]: ...
 
+    @abstractmethod
+    def clear(self) -> None: ...
+
 
 class LocalJsonlRecorder(DecisionRecorder):
     """Appends decision records as JSON lines. Used for local dev/tests."""
@@ -33,6 +36,10 @@ class LocalJsonlRecorder(DecisionRecorder):
         records = [DecisionRecord.model_validate_json(line) for line in lines if line]
         records.sort(key=lambda r: r.created_at, reverse=True)
         return records[:limit]
+
+    def clear(self) -> None:
+        if self._path.exists():
+            self._path.unlink()
 
 
 class BigQueryRecorder(DecisionRecorder):
@@ -85,6 +92,12 @@ class BigQueryRecorder(DecisionRecorder):
         query = f"SELECT * FROM `{self._table_id}` ORDER BY created_at DESC LIMIT {int(limit)}"
         rows = self._client.query(query).result()
         return [DecisionRecord.model_validate(dict(row)) for row in rows]
+
+    def clear(self) -> None:
+        raise NotImplementedError(
+            "Clearing BigQuery decision history is a production-data-destructive "
+            "operation and is intentionally not wired up; do it manually if needed."
+        )
 
 
 def get_recorder(config: Config) -> DecisionRecorder:

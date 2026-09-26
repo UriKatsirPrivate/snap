@@ -127,6 +127,19 @@
   }
   @keyframes spin { to { transform: rotate(360deg); } }
   .error { color: #dc2626; font-size: 12.5px; margin-top: 8px; }
+  .help {
+    display: inline-block;
+    width: 13px; height: 13px;
+    line-height: 13px;
+    border-radius: 50%;
+    background: var(--border);
+    color: var(--muted);
+    font-size: 10px;
+    text-align: center;
+    margin-left: 4px;
+    cursor: help;
+    font-weight: 600;
+  }
 </style>
 </head>
 <body>
@@ -147,9 +160,10 @@
         <input name="task_id" value="t-1" />
         <label>Candidates (one per line: id,provider,model)</label>
         <textarea name="candidates">gemini-flash,google,gemini-2.5-flash
-gemini-pro,google,gemini-2.5-pro</textarea>
+gemini-pro,google,gemini-2.5-pro
+gemini-flash-lite,google,gemini-2.5-flash-light</textarea>
         <label>Fallback route id (optional)</label>
-        <input name="fallback_route_id" value="gemini-flash" />
+        <input name="fallback_route_id" value="gemini-flash-lite" />
         <label>Context (free text, sent as {"task": ...})</label>
         <textarea name="context">Refactor the authentication module across 12 files to use dependency injection</textarea>
         <button class="run" type="submit">Run route decision</button>
@@ -177,13 +191,30 @@ gemini-pro,google,gemini-2.5-pro</textarea>
 
   <main style="grid-template-columns: 1fr; padding-top: 0;">
     <div class="panel">
-      <h2>Decision stream</h2>
+      <div id="latencyStats" style="font-size:18px; font-weight:600; margin-bottom:14px;">No latency data yet.</div>
+      <div style="display:flex; align-items:center; justify-content:space-between; gap:12px;">
+        <h2>Decision stream</h2>
+        <div id="clearHistoryArea" style="display:flex; align-items:center; gap:10px;">
+          <span id="clearHistoryConfirm" style="display:none; font-size:12.5px; color:var(--muted);">
+            Clear all decision history?
+            <button id="clearHistoryYes" class="run" style="width:auto; margin-top:0; padding:4px 10px; background:#dc2626;">Yes, clear</button>
+            <button id="clearHistoryNo" class="run" style="width:auto; margin-top:0; padding:4px 10px; background:var(--off);">Cancel</button>
+          </span>
+          <button id="clearHistoryBtn" class="run" style="width:auto; margin-top:0; padding:6px 12px; background:#dc2626;">Clear history</button>
+        </div>
+      </div>
       <div class="stream-wrap">
         <table>
           <thead>
             <tr>
-              <th>Time</th><th>Kind</th><th>Task</th><th>Offered</th>
-              <th>Choice</th><th>Status</th><th>Final</th><th>Selector time</th>
+              <th>Time<span class="help" title="When this decision record was created.">?</span></th>
+              <th>Kind<span class="help" title="'route' = model/provider pick, 'focus' = inspect/implement/verify/answer pick.">?</span></th>
+              <th>Task<span class="help" title="task_id from the request, to correlate decisions for the same task.">?</span></th>
+              <th>Offered<span class="help" title="Number of candidates/options the host presented to the selector.">?</span></th>
+              <th>Choice<span class="help" title="What Gemini itself picked, before validation. '—' if it abstained.">?</span></th>
+              <th>Status<span class="help" title="accepted = Gemini's pick was used as-is. fallback = pick was invalid/abstained, fallback used instead. abstained = invalid pick and no fallback available.">?</span></th>
+              <th>Final<span class="help" title="What the host actually used after validating Gemini's choice.">?</span></th>
+              <th>Selector time<span class="help" title="Wall-clock time the Gemini selector call took, in ms.">?</span></th>
             </tr>
           </thead>
           <tbody id="streamBody">
@@ -314,11 +345,29 @@ function statusFor(r) {
   return "accepted";
 }
 
+function median(sorted) {
+  if (!sorted.length) return null;
+  const mid = Math.floor(sorted.length / 2);
+  return sorted.length % 2 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;
+}
+
+function renderLatencyStats(records) {
+  const el = document.getElementById("latencyStats");
+  const latencies = records.map(r => r.selector_latency_ms).filter(v => v != null).sort((a, b) => a - b);
+  if (!latencies.length) {
+    el.textContent = "No latency data yet.";
+    return;
+  }
+  const avg = latencies.reduce((a, b) => a + b, 0) / latencies.length;
+  el.innerHTML = `avg ${avg.toFixed(0)} ms · median ${median(latencies).toFixed(0)} ms <span style="color:var(--muted); font-weight:400; font-size:13px;">(n=${latencies.length})</span>`;
+}
+
 async function loadStream() {
   const streamBody = document.getElementById("streamBody");
   try {
     const res = await fetch("/v1/decisions/recent?limit=25");
     const records = await res.json();
+    renderLatencyStats(records);
     if (!records.length) {
       streamBody.innerHTML = `<tr><td colspan="8" class="empty">No decisions recorded yet.</td></tr>`;
       return;
@@ -339,6 +388,32 @@ async function loadStream() {
     streamBody.innerHTML = `<tr><td colspan="8" class="empty">Failed to load: ${err.message}</td></tr>`;
   }
 }
+
+const clearBtn = document.getElementById("clearHistoryBtn");
+const clearConfirm = document.getElementById("clearHistoryConfirm");
+
+clearBtn.addEventListener("click", () => {
+  clearBtn.style.display = "none";
+  clearConfirm.style.display = "inline-flex";
+  clearConfirm.style.alignItems = "center";
+  clearConfirm.style.gap = "8px";
+});
+
+document.getElementById("clearHistoryNo").addEventListener("click", () => {
+  clearConfirm.style.display = "none";
+  clearBtn.style.display = "";
+});
+
+document.getElementById("clearHistoryYes").addEventListener("click", async () => {
+  clearConfirm.style.display = "none";
+  clearBtn.style.display = "";
+  try {
+    await fetch("/v1/decisions", { method: "DELETE" });
+    loadStream();
+  } catch (err) {
+    formError.textContent = "Failed to clear history: " + err.message;
+  }
+});
 
 loadStream();
 setInterval(loadStream, 4000);

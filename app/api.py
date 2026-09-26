@@ -120,4 +120,12 @@ def recent_decisions(
     return recorder.recent(limit)
 
 
+@app.delete("/v1/decisions")
+def clear_decisions(
+    recorder: DecisionRecorder = Depends(get_decision_recorder),
+) -> dict[str, str]:
+    recorder.clear()
+    return {"status": "cleared"}
+
+
 app.mount("/", StaticFiles(directory="static", html=True), name="static")
